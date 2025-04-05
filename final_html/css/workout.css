@@ -1,0 +1,59 @@
+/*This file is the style for the workout html*/
+
+body {
+    background-color: #C9E4CA;
+    color: #2C5F2D;
+    font-family: 'Arial, Helvetica, sans-serif';
+}
+
+label {
+    border: solid 2px;
+    border-color: #5CC6D0;
+    border-radius: 5px;
+    display: inline-block;
+    width: 200px;
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #DDE5B6;
+    text-align: center;
+}
+
+header {
+    font-size: x-large;
+    width: fit-content;
+    padding: 10px 20px;
+    border: solid 2px;
+    border-color: #5CC6D0;
+    border-radius: 5px;
+    background-color: #B2EBF2;
+    text-align: center;
+    margin: 20px auto;
+    color: #2C5F2D;
+}
+
+table#workoutTable {
+    width: 80%;
+    max-width: 700px;
+    min-height: 300px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    border: 2px solid #5CC6D0;
+    background-color: #E0F7FA;
+    color: #2C5F2D;
+}
+
+table#workoutTable th, table#workoutTable td {
+    border: 1px solid #5CC6D0;
+    padding: 10px;
+    text-align: center;
+    min-width: 100px;
+    height: 50px;
+}
+
+table#workoutTable th {
+    background-color: #B2EBF2;
+    color: #2C5F2D;
+}
+
+
