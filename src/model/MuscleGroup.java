@@ -2,5 +2,5 @@
 package model;
 
 public enum MuscleGroup {
-	BACK, CHEST, SHOULDERS, ARM, CORE, LEGS, MISC;
+	BACK, CHEST, SHOULDERS, ARMS, CORE, LEGS, MISC;
 }

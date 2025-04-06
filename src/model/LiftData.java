@@ -1,6 +1,8 @@
 // ExerciseAndReps.java
 package model;
 
+import java.util.Objects;
+
 public class LiftData {
 	// INSTANCE VARIABLES
 	private Exercise ex;
@@ -46,5 +48,21 @@ public class LiftData {
 		this.sets = sets;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(ex);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LiftData other = (LiftData) obj;
+		return Objects.equals(ex, other.ex);
+	}
 	
 }

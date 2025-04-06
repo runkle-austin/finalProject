@@ -14,7 +14,7 @@ public class LiftDataTest {
 	
 	@Test
 	public void testLiftData() {
-		Exercise e = new Exercise(MuscleGroup.BACK, "Pull up", Intensity.MEDIUM);
+		Exercise e = new Exercise("Pull up", MuscleGroup.BACK, Intensity.MEDIUM);
 		LiftData l = new LiftData(e, 10, 0.0, 3);
 		assertEquals(l.getExercise(), e);
 		assertEquals(l.getReps(), 10);
