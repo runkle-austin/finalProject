@@ -1,0 +1,31 @@
+Barbell Bench Press, Chest, High 
+Dumbbell Bench Press, Chest, Med 
+Incline Barbell Press, Chest, High 
+Pec Deck, Chest, High 
+Push Ups, Chest, Low 
+Dumbbell Shoulder Press, Shoulders, Med 
+Dumbbell Side Raises, Shoulders, Med 
+Cable Tricep Pushdown, Arms, Med 
+SkullCrushers, Arms, Med 
+Overhead Tricep Extension, Arms, Med 
+Supinated Lat Pulldown, Back, Med 
+Pronated Lat Pulldown, Back, Med 
+Machine High Row, Back, High 
+Cable Row, Back, Med 
+Cable Rear Delt Fly, Shoulders, Low 
+Cable Fly, Shoulders, Low 
+Pull Ups, Back, High 
+Seated Curls, Arms, Low
+Preacher Curls, Arms, Low 
+Crunch, Core, Med 
+Squats, Legs, High 
+Deadlift, Legs, High 
+Leg Press, Legs, High 
+Leg Extension, Legs, Med 
+Hamstring Curl, Legs, Med
+Calf Raise, Legs, Low 
+Hip Abductor, Legs, Low 
+Hip Thrusts, Legs, High 
+Neck Extension, Misc, Low
+Cable Face Pull, Back, Low 
+
