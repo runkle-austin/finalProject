@@ -64,5 +64,12 @@ public class LiftData {
 		LiftData other = (LiftData) obj;
 		return Objects.equals(ex, other.ex);
 	}
+
+	@Override
+	public String toString() {
+		return "LiftData exercise = " + ex + ", reps = " + reps + ", weight = " + weight + ", sets = " + sets + " ";
+	}
+	
+
 	
 }

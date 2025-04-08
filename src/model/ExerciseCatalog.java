@@ -16,7 +16,7 @@ public final class ExerciseCatalog {
 	
 	// CONSTRUCTOR
 	public static void loadExercises() {
-		File file = new File("ExerciseCatalog.txt");
+		File file = new File("exerciseCatalog.txt");
 		Scanner scanner;
 		
 		try {
@@ -31,9 +31,9 @@ public final class ExerciseCatalog {
 	}
 	
 	private static Exercise createExercise(String[] line) {
-		String name = line[0];
+		String name  = line[0];
 		String group = line[1];
-		String intes =line[2];
+		String intes = line[2];
 		
 		MuscleGroup muscleGroup = muscleGroupEnum(group);
 		Intensity intensity = intensityEnum(intes);

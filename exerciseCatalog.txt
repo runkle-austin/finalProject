@@ -28,4 +28,3 @@ Hip Abductor, Legs, Low
 Hip Thrusts, Legs, High 
 Neck Extension, Misc, Low
 Cable Face Pull, Back, Low 
-

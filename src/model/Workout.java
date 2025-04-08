@@ -17,7 +17,7 @@ public class Workout {
 	
 	// METHODS
 	
-	// add a life to the list of lifts
+	// add a lift to the set of lifts
 	public void addLift(String exName, int reps, double weight, int sets) {
 		// retrieve exercise
 		Exercise e = ExerciseCatalog.getExerciseByName(exName);
@@ -27,10 +27,30 @@ public class Workout {
 		lifts.add(l);
 	}
 	
+	// remove a lift form the set of lifts
+	public boolean removeLift(String exName) {
+		for (LiftData l: lifts) {
+			if (l.getExercise().getName().equals(exName)) {
+				lifts.remove(l);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	// get the name of the work out
 	public String getName() {
 		return this.name;
+	}
+	
+	@Override
+	public String toString() {
+		String str = "Workout "+ this.name + "\n";
+		for (LiftData l: lifts) {
+			str = str + l.getExercise().getName() + "\n";
+		}
+		return str;
 	}
 	
 	

@@ -33,7 +33,7 @@ public class View {
                     // TODO create account
                     break;
                 case "3":
-                    System.out.println("Goodbye!🎵");
+                    System.out.println("Program Terminated");
                     return;
                 default:
                     System.out.println("Invalid input. Please enter a number between 1 and 3.");
