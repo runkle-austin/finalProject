@@ -52,6 +52,14 @@ public class Workout {
 		}
 		return str;
 	}
+
+	public Workout copy() {
+		Workout copy = new Workout(this.name);
+		for (LiftData l: lifts) {
+			copy.addLift(l.getExercise().getName(), l.getReps(), l.getWeight(), l.getSets());
+		}
+		return copy;
+	}
 	
 	
 }

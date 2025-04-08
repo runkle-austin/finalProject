@@ -19,9 +19,8 @@ public class WorkoutCycleTest {
 		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
 		cw.addWorkout("MONDAY", w);
 		String output = cw.toString();
-		
+		// TODO
 		assertEquals(cw.toString(), output);
-		
 		assertEquals(cw.removeWorkoutByDay("Tuesday"), false);
 		assertEquals(cw.removeWorkoutByDay("Monday"), true);
 		
