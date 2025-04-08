@@ -45,7 +45,6 @@ public final class WorkoutCycle {
 		for (int i = 0; i < numberWeeks; i ++) {
 			HashMap<DayOfWeek, Workout> thisWeek = updateWeek(oneWeek, i);
 			fullCycle.add(thisWeek);
-			
 		}
 
 		return fullCycle;
@@ -53,20 +52,23 @@ public final class WorkoutCycle {
 	
 	// return the updated week based on week number
 	private HashMap<DayOfWeek, Workout> updateWeek(HashMap<DayOfWeek, Workout> inputWeek, int i) {
-		HashMap<DayOfWeek, Workout> thisWeek;
+		HashMap<DayOfWeek, Workout> thisWeek = new HashMap<>();
 		for (DayOfWeek day: inputWeek.keySet()) {
-			// TODO
 			Workout thisDay = inputWeek.get(day).copy();
 			// gets set of lifts in a days workout
-			for (LiftData l: inputWeek.get(day).lifts) {
+			for (LiftData l: thisDay.toArrayList()) {
 				Intensity intes = l.getExercise().getIntensity();
 				if (Intensity.HIGH.equals(intes)) {
-					
+					l.setReps(l.getReps() + 1);
+				} else if (Intensity.MEDIUM.equals(intes)) {
+					l.setReps(l.getReps() + 2);
+				} else if (Intensity.LOW.equals(intes)) {
+					l.setReps(l.getReps() + 2);
 				}
-				
 			}
+			thisWeek.put(day, thisDay);
 		}
-		return null;
+		return thisWeek;
 	}
 
 	@Override

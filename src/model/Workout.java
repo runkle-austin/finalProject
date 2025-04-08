@@ -1,6 +1,7 @@
 //Workout.java
 package model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +37,15 @@ public class Workout {
 			}
 		}
 		return false;
+	}
+	
+	// get the lifts in the work out
+	public ArrayList<LiftData> toArrayList() {
+		ArrayList<LiftData> copy = new ArrayList<>();
+		for (LiftData l: lifts) {
+			copy.add(l);
+		}
+		return copy;
 	}
 	
 	
