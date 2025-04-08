@@ -20,7 +20,7 @@ public final class WorkoutCycle {
 	
 	// add a Work out to the workout cycle
 	public void addWorkout(String d, Workout w) {
-		DayOfWeek day = DayOfWeek.valueOf(d);
+		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
 		// remove any existing days
 		fullCycle.remove(day);
 		// add the work out to the full cycle
@@ -28,15 +28,27 @@ public final class WorkoutCycle {
 	}
 	
 	// remove a work out and return true if completed
-	public void removeWorkoutByDay(DayOfWeek day) {
+	public boolean removeWorkoutByDay(String d) {
+		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
+		if (!fullCycle.containsKey(day)) {
+			return false;
+		}
 		fullCycle.remove(day);
+		return true;
 	}
 	
 	@Override
 	public String toString() {
+		if (fullCycle.isEmpty()) {
+			return "Workout cycle is empty \n";
+		}
 		String str = "Workout " + this.getName() + "\n";
 		for (DayOfWeek day: DayOfWeek.values()) {
-			str = str + " " + day + " " + fullCycle.get(day).toString();
+			if (fullCycle.get(day) == null) {
+				str = str + "  ==== " + day + " ==== \nREST DAY\n";
+			} else {
+				str = str + " ==== " + day + " ---> " + fullCycle.get(day).toString();
+			}
 		}
 		return str;
 	}
