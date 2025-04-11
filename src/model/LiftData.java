@@ -7,14 +7,14 @@ public class LiftData {
 	// INSTANCE VARIABLES
 	private Exercise ex;
 	private int reps;
-	private double weight;
+	private double weightInLbs;
 	private int sets;
 	
 	// CONSTRUCTOR
-	public LiftData(Exercise ex, int reps, double weight, int sets) {
+	public LiftData(Exercise ex, int reps, double weightInLbs, int sets) {
 		this.ex = ex;
 		this.reps = reps;
-		this.weight = weight;
+		this.weightInLbs = weightInLbs;
 		this.sets = sets;
 	}
 	
@@ -39,8 +39,12 @@ public class LiftData {
 		return this.reps;
 	}
 	
-	public double getWeight() {
-		return this.weight;
+	public double getWeightInLbs() {
+		return this.weightInLbs;
+	}
+	
+	public double getWeightInKg(double lbs) {
+		return this.weightInLbs / 2.20462;
 	}
 	
 	public int getSets() {
@@ -52,14 +56,19 @@ public class LiftData {
 		this.reps = reps;
 	}
 	
-	public void setWeight(double weight) {
-		this.weight = weight;
+	public void setWeightInLbs(double lbs) {
+		this.weightInLbs = lbs;
+	}
+	
+	public void setWeightInKg(double kg) {
+		this.weightInLbs = kg * 2.20462;
 	}
 	
 	public void setSets(int sets) {
 		this.sets = sets;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(ex);
@@ -79,11 +88,11 @@ public class LiftData {
 
 	@Override
 	public String toString() {
-		return ex.getName() + ", reps = " + reps + ", weight = " + weight + ", sets = " + sets + "\n";
+		return ex.getName() + ", reps = " + reps + ", weight = " + weightInLbs + ", sets = " + sets + "\n";
 	}
 
 	public LiftData copy() {
-		return new LiftData(ex, reps, weight, sets);
+		return new LiftData(ex, reps, weightInLbs, sets);
 	}
 	
 }

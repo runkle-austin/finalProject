@@ -19,17 +19,17 @@ public class LiftDataTest {
 		assertEquals(l.getExercise(), e);
 		assertEquals(l.getReps(), 10);
 		// This was done because assertEquals does not work with doubles
-		assertEquals(l.getWeight() + "", 0.0 + "");
+		assertEquals(l.getWeightInLbs() + "", 0.0 + "");
 		assertEquals(l.getSets(), 3);
 		
 		// adjust values
 		l.setReps(12);
-		l.setWeight(2.5);
+		l.setWeightInLbs(2.5);
 		l.setSets(4);
 		
 		assertEquals(l.getReps(), 12);
 		// This was done because assertEquals does not work with doubles
-		assertEquals(l.getWeight() + "", 2.5 + "");
+		assertEquals(l.getWeightInLbs() + "", 2.5 + "");
 		assertEquals(l.getSets(), 4);
 	}
 	

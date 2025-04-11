@@ -20,7 +20,7 @@ public final class WorkoutCycle {
 		return this.name;
 	}
 	
-	// add a Work out to the workout cycle
+	// add a Workout to the workout cycle
 	public void addWorkout(String d, Workout w) {
 		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
 		// remove any existing days

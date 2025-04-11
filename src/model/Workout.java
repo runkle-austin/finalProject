@@ -89,7 +89,7 @@ public class Workout {
 	public Workout copy() {
 		Workout copy = new Workout(this.name);
 		for (LiftData l: lifts) {
-			copy.addLift(l.getName(), l.getReps(), l.getWeight(), l.getSets());
+			copy.addLift(l.getName(), l.getReps(), l.getWeightInLbs(), l.getSets());
 		}
 		return copy;
 	}
