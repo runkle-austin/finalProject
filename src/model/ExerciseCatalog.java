@@ -31,9 +31,9 @@ public final class ExerciseCatalog {
 	}
 	
 	private static Exercise createExercise(String[] line) {
-		String name  = line[0];
-		String group = line[1];
-		String intes = line[2];
+		String name  = line[0].strip();
+		String group = line[1].strip();
+		String intes = line[2].strip();
 		
 		MuscleGroup muscleGroup = muscleGroupEnum(group);
 		Intensity intensity = intensityEnum(intes);
@@ -42,10 +42,10 @@ public final class ExerciseCatalog {
 	
 
 	public static Intensity intensityEnum(String intes) {
-		switch(intes) {
-			case "Low":
+		switch(intes.toUpperCase()) {
+			case "LOW":
 				return Intensity.LOW;
-			case "Medium":
+			case "MED":
 				return Intensity.MEDIUM;
 			default:
 				return Intensity.HIGH;
@@ -89,5 +89,10 @@ public final class ExerciseCatalog {
 			}
 		}
 		return null;
+	}
+	
+	// helper method for testing
+	public static void empty() {
+		exercises = new ArrayList<>();
 	}
 }
