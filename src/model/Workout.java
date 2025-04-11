@@ -38,8 +38,6 @@ public class Workout {
 	// adds lift in descending order from highest intensity to lowest
 	private void addByIntensity(LiftData lift) {
 		for (int i = 0; i < lifts.size(); i ++) {
-			// TODO all are being set to HIGH intensity
-			System.out.println(lift.getIntensity());
 			// compares lift to currLift, if lift has greater intensity, add at that index
 			if (lift.getIntensity().compareTo(lifts.get(i).getIntensity()) > 0) {
 				lifts.add(i, lift);
@@ -68,6 +66,11 @@ public class Workout {
 			copy.add(l.copy());
 		}
 		return copy;
+	}
+	
+	// getter
+	public ArrayList<LiftData> lifts(){
+		return lifts;
 	}
 	
 	
