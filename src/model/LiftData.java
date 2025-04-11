@@ -19,8 +19,20 @@ public class LiftData {
 	}
 	
 	// GETTERS
+	
+	public String getName() {
+		return this.ex.getName();
+	}
 	public Exercise getExercise() {
 		return this.ex;
+	}
+	
+	public Intensity getIntensity() {
+		return this.ex.getIntensity();
+	}
+	
+	public MuscleGroup getMuscleGroup() {
+		return this.ex.getMuscle();
 	}
 	
 	public int getReps () {
@@ -67,9 +79,11 @@ public class LiftData {
 
 	@Override
 	public String toString() {
-		return "LiftData exercise = " + ex + ", reps = " + reps + ", weight = " + weight + ", sets = " + sets + " ";
+		return ex.getName() + ", reps = " + reps + ", weight = " + weight + ", sets = " + sets + "\n";
 	}
-	
 
+	public LiftData copy() {
+		return new LiftData(ex, reps, weight, sets);
+	}
 	
 }
