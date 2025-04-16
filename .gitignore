@@ -1,0 +1,9 @@
+#Ignores all compiled files
+*.class
+
+#Ignores out/
+out/
+
+#Ignores all intellij settings (should setup JavaFX locally)
+.idea/
+*.iml
