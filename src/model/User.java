@@ -6,6 +6,12 @@ public class User {
 	// INSTANCE VARIABLES
 	private String userName;
 	private String password;
+	/*
+	TODO do we want to change this to a integer, or figure out another way to do this that way
+	   we can easily turn this class into a json file?
+
+	   I didnt do this for LA 2 so im def going to be relying on you guys here
+	*/
 	private byte[] salt;
 	
 	// CONSTRUCTOR

@@ -1,3 +1,6 @@
+//file: WorkoutCycle.java
+//desc: this class generates a muilti-week workout cycle based on one week of workouts
+
 package model;
 
 import java.time.DayOfWeek;
@@ -22,7 +25,7 @@ public final class WorkoutCycle {
 		return this.name;
 	}
 	
-	// add a Workout to the workout cycle
+	// adds a single day of workouts to our week
 	public void addWorkout(String d, Workout w) {
 		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
 		// remove any existing days
@@ -31,7 +34,7 @@ public final class WorkoutCycle {
 		oneWeek.put(day, w);
 	}
 	
-	// remove a work out and return true if completed
+	// remove a single day of workouts and return true if completed
 	public boolean removeWorkoutByDay(String d) {
 		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
 		if (!oneWeek.containsKey(day)) {
@@ -40,7 +43,8 @@ public final class WorkoutCycle {
 		oneWeek.remove(day);
 		return true;
 	}
-	
+
+	//based on our input week of workouts, generates a full workout cycle of len numberOfWeeks
 	public void createFullCycle() {
 		ArrayList<HashMap<DayOfWeek, Workout>> fullCycle = new ArrayList<>(numberWeeks);
 		// fill the array list with template weeks
@@ -72,7 +76,7 @@ public final class WorkoutCycle {
 	
 	// TODO does this work if days are empty? mostly concerned w/ thisDay.getLifts()
 	
-	// return the updated week based on week number
+	// helper function used in createFullCycle
 	private HashMap<DayOfWeek, Workout> updateWeek(HashMap<DayOfWeek, Workout> inputWeek, int i) {
 		HashMap<DayOfWeek, Workout> thisWeek = new HashMap<>();
 		// loop through days in the week, and lifts in each days workout
@@ -99,6 +103,7 @@ public final class WorkoutCycle {
 		return thisWeek;
 	}
 
+
 	public String getFullCycle() {
 		String str = "Full Cycle\n";
 		int index = 1;
@@ -108,7 +113,9 @@ public final class WorkoutCycle {
 		}
 		return str;
 	}
-	
+
+
+	//TODO do we want to replace the toString with getFullCycle()?
 	@Override
 	public String toString() {
 		if (oneWeek.isEmpty()) {
