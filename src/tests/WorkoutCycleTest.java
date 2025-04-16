@@ -96,4 +96,5 @@ public class WorkoutCycleTest {
 		assertEquals(cw.getFullCycle(), str);
 	}
 	
+	
 }
