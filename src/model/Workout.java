@@ -1,61 +1,52 @@
-//Workout.java
+// Workout.java
 package model;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Objects;
-=======
-import java.util.HashSet;
-import java.util.Set;
->>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 
 // Stores information about a single work out
 public class Workout {
-	// INSTANCE VARAIBLES
+	// INSTANCE VARIABLES
 	String name;
-	
 	ArrayList<LiftData> lifts = new ArrayList<>();
-	
+
 	// CONSTRUCTOR
 	public Workout(String name) {
 		this.name = name;
 	}
-	
+
 	// METHODS
-	
+
 	// add a lift to the set of lifts, returns true if successful, false if not
 	public boolean addLift(String exName, int reps, double weight, int sets) {
 		// retrieve exercise
 		Exercise e = ExerciseCatalog.getExerciseByName(exName);
 		// add data to exercise
 		LiftData l = new LiftData(e, reps, weight, sets);
-		
-		// Lift data has overloaded equals method
-		// add if not in list
-		if (! lifts.contains(l)) {
+
+		// LiftData has overloaded equals method
+		if (!lifts.contains(l)) {
 			addByIntensity(l);
 			return true;
 		}
 		return false;
 	}
 
-	// @pre lift must be unique 
+	// @pre lift must be unique
 	// adds lift in descending order from highest intensity to lowest
 	private void addByIntensity(LiftData lift) {
-		for (int i = 0; i < lifts.size(); i ++) {
-			// compares lift to currLift, if lift has greater intensity, add at that index
+		for (int i = 0; i < lifts.size(); i++) {
 			if (lift.getIntensity().compareTo(lifts.get(i).getIntensity()) > 0) {
 				lifts.add(i, lift);
 				return;
 			}
 		}
-		// if first item or least intensity, add to end
 		lifts.add(lift);
 	}
 
-	// remove a lift form the set of lifts
+	// remove a lift from the set of lifts
 	public boolean removeLift(String exName) {
-		for (LiftData l: lifts) {
+		for (LiftData l : lifts) {
 			if (l.getExercise().getName().equals(exName)) {
 				lifts.remove(l);
 				return true;
@@ -63,52 +54,49 @@ public class Workout {
 		}
 		return false;
 	}
-	
-	// get the lifts in the work out
-<<<<<<< HEAD
+
+	// get deep-copied lifts in the workout
 	public ArrayList<LiftData> getLifts() {
 		ArrayList<LiftData> copy = new ArrayList<>();
-		for (LiftData l: lifts) {
+		for (LiftData l : lifts) {
 			copy.add(l.copy());
-=======
-	public ArrayList<LiftData> toArrayList() {
-		ArrayList<LiftData> copy = new ArrayList<>();
-		for (LiftData l: lifts) {
-			copy.add(l);
->>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 		}
 		return copy;
 	}
-	
-<<<<<<< HEAD
-	// getter
-	public ArrayList<LiftData> lifts(){
+
+	// shallow copy version, used by one branch
+	public ArrayList<LiftData> toArrayList() {
+		ArrayList<LiftData> copy = new ArrayList<>();
+		for (LiftData l : lifts) {
+			copy.add(l);
+		}
+		return copy;
+	}
+
+	// getter for raw internal list
+	public ArrayList<LiftData> lifts() {
 		return lifts;
 	}
-	
-=======
->>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
-	
-	// get the name of the work out
+
+	// get the name of the workout
 	public String getName() {
 		return this.name;
 	}
-	
+
 	@Override
 	public String toString() {
-		String str = "Workout "+ this.name + "\n";
-		for (LiftData l: lifts) {
+		String str = "Workout " + this.name + "\n";
+		for (LiftData l : lifts) {
 			str = str + l.toString();
 		}
 		return str;
 	}
 
-<<<<<<< HEAD
-	// creates deep copy of lifts
+	// creates deep copy of workout
 	public Workout copy() {
 		Workout copy = new Workout(this.name);
-		for (LiftData l: lifts) {
-			copy.addLift(l.getName(), l.getReps(), l.getWeightInLbs(), l.getSets());
+		for (LiftData l : lifts) {
+			copy.addLift(l.getExercise().getName(), l.getReps(), l.getWeightInLbs(), l.getSets());
 		}
 		return copy;
 	}
@@ -122,25 +110,9 @@ public class Workout {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		Workout other = (Workout) obj;
-		// auto generated, should use arraylist equals which will compare elements
 		return Objects.equals(lifts, other.lifts) && Objects.equals(name, other.name);
 	}
-	
-	
-=======
-	public Workout copy() {
-		Workout copy = new Workout(this.name);
-		for (LiftData l: lifts) {
-			copy.addLift(l.getExercise().getName(), l.getReps(), l.getWeight(), l.getSets());
-		}
-		return copy;
-	}
->>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
-	
-	
 }
