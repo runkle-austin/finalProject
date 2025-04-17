@@ -1,20 +1,23 @@
 // Exercise.java
-package model;
+package src.model;
 
 import java.util.Objects;
 
 // store information about each song
 public final class Exercise {
 	// INSTANCE VARIABLES
-	private final MuscleGroup muscle;
-	private final Intensity inten;
-	private final String name;
+	private model.MuscleGroup muscle;
+	private model.Intensity inten;
+	private String name;
 	
 	// CONSTRUCTOR
-	public Exercise(String name, MuscleGroup muscle, Intensity inten) {
+	public Exercise(String name, model.MuscleGroup muscle, model.Intensity inten) {
 		this.muscle = muscle;	
 		this.name = name;
 		this.inten = inten;
+	}
+
+	public Exercise() {
 	}
 
 	// METHODS
@@ -22,13 +25,19 @@ public final class Exercise {
 		return name;
 	}
 
-	public Intensity getIntensity() {
+	public void setName(String name) {}
+
+	public model.Intensity getIntensity() {
 		return inten;
 	}
 
-	public MuscleGroup getMuscle() {
+	public void setIntensity(model.Intensity inten) {}
+
+	public model.MuscleGroup getMuscle() {
 		return muscle;
 	}
+
+	public void setMuscle(model.MuscleGroup muscle) {}
 	
 	@Override
 	public int hashCode() {
