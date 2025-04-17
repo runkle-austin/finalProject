@@ -12,69 +12,72 @@ import model.Workout;
 import model.WorkoutCycle;
 
 public class WorkoutCycleTest {
-	
+
 //	@BeforeEach
 //	void setUp() {
 //		ExerciseCatalog.loadExercises();
 //	}
+//
 //	@AfterEach
 //	void tearDown() {
 //		ExerciseCatalog.empty();
 //	}
-	
-	
+
 	@Test
 	public void testAddWorkout() {
 		ExerciseCatalog.loadExercises();
 		WorkoutCycle cw = new WorkoutCycle("Test1", 5);
 		Workout w = new Workout("Test");
+
 		assertEquals(cw.toString(), "Workout cycle is empty \n");
+
 		w.addLift("Pec Deck", 1, 2, 3);
 		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
 		cw.addWorkout("MONDAY", w);
-<<<<<<< HEAD
-		String str = "Workout Test1\n"
-				+ " ==== MONDAY ---> Workout Test\n"
-				+ "Pec Deck, reps = 1, weight = 2.0, sets = 3\n"
-				+ "Cable Rear Delt Fly, reps = 10, weight = 11.0, sets = 12\n"
-				+ "  ==== TUESDAY ==== \n"
-				+ "REST DAY\n"
-				+ "  ==== WEDNESDAY ==== \n"
-				+ "REST DAY\n"
-				+ "  ==== THURSDAY ==== \n"
-				+ "REST DAY\n"
-				+ "  ==== FRIDAY ==== \n"
-				+ "REST DAY\n"
-				+ "  ==== SATURDAY ==== \n"
-				+ "REST DAY\n"
-				+ "  ==== SUNDAY ==== \n"
-				+ "REST DAY\n";
-		assertEquals(cw.toString(), str);
-=======
-		String output = cw.toString();
-		// TODO
-		assertEquals(cw.toString(), output);
-		assertEquals(cw.removeWorkoutByDay("Tuesday"), false);
-		assertEquals(cw.removeWorkoutByDay("Monday"), true);
-		
+
+		String expected = "Workout Test1\n" +
+				" ==== MONDAY ---> Workout Test\n" +
+				"Pec Deck, reps = 1, weight = 2.0, sets = 3\n" +
+				"Cable Rear Delt Fly, reps = 10, weight = 11.0, sets = 12\n" +
+				"  ==== TUESDAY ==== \n" +
+				"REST DAY\n" +
+				"  ==== WEDNESDAY ==== \n" +
+				"REST DAY\n" +
+				"  ==== THURSDAY ==== \n" +
+				"REST DAY\n" +
+				"  ==== FRIDAY ==== \n" +
+				"REST DAY\n" +
+				"  ==== SATURDAY ==== \n" +
+				"REST DAY\n" +
+				"  ==== SUNDAY ==== \n" +
+				"REST DAY\n";
+
+		assertEquals(expected, cw.toString());
+
+		// Now test removing
+		assertFalse(cw.removeWorkoutByDay("TUESDAY"));
+		assertEquals(true, cw.removeWorkoutByDay("MONDAY"));
 		assertEquals(cw.toString(), "Workout cycle is empty \n");
-		
->>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	}
-	
+
 	@Test
 	public void testCreateFullCycle() {
 		ExerciseCatalog.loadExercises();
 		WorkoutCycle cw = new WorkoutCycle("Test1", 5);
 		Workout w = new Workout("Test");
+
 		assertEquals(cw.toString(), "Workout cycle is empty \n");
-		// intensity is high, should be incrementing by 1
+
+		// Intensity HIGH: Pec Deck
+		// Intensity LOW: Cable Rear Delt Fly, Pronated Lat Pulldown
 		w.addLift("Pec Deck", 1, 2, 3);
-		// intensity is low, should increment by 3
 		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
 		w.addLift("Pronated Lat Pulldown", 10, 11, 12);
 		cw.addWorkout("MONDAY", w);
-		String str = """
+
+		cw.createFullCycle();
+
+		String expected = """
 				Full Cycle
 				Week: 1
 				{MONDAY=Workout Test
@@ -107,20 +110,21 @@ public class WorkoutCycleTest {
 				Week: 5
 				{MONDAY=Workout Test
 				Pec Deck, reps = 3, weight = 1.0, sets = 3
-				Pronated Lat Pulldown, reps = 3, weight = 6.0, sets = 12
-				Cable Rear Delt Fly, reps = 3, weight = 6.0, sets = 12
+				Pronated Lat Pulldown, reps = 7, weight = 6.0, sets = 12
+				Cable Rear Delt Fly, reps = 7, weight = 6.0, sets = 12
 				}
 				=================
 				""";
-		cw.createFullCycle();
-		assertEquals(str, cw.getFullCycle());
+
+		assertEquals(expected, cw.getFullCycle());
 	}
 
 	@Test
-	public void testRemoveWorkoutByDay(){
+	public void testRemoveWorkoutByDay() {
 		ExerciseCatalog.loadExercises();
 		WorkoutCycle cw = new WorkoutCycle("Test1", 5);
 		Workout w = new Workout("Test");
+
 		assertEquals(cw.toString(), "Workout cycle is empty \n");
 
 		w.addLift("Pec Deck", 1, 2, 3);
@@ -151,6 +155,7 @@ public class WorkoutCycleTest {
 		assertEquals(cw.toString(), ex1);
 
 		cw.removeWorkoutByDay("MONDAY");
+
 		String ex2 = "Workout Test1\n" +
 				"  ==== MONDAY ==== \n" +
 				"REST DAY\n" +
@@ -171,7 +176,7 @@ public class WorkoutCycleTest {
 	}
 
 	@Test
-	public void testRemoveWorkoutDayEmpty(){
+	public void testRemoveWorkoutDayEmpty() {
 		ExerciseCatalog.loadExercises();
 		WorkoutCycle cw = new WorkoutCycle("Test1", 5);
 		Workout w = new Workout("Test");
@@ -181,5 +186,4 @@ public class WorkoutCycleTest {
 
 		assertFalse(cw.removeWorkoutByDay("TUESDAY"));
 	}
-	
 }
