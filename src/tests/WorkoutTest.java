@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import model.Exercise;
@@ -14,18 +16,30 @@ import model.MuscleGroup;
 import model.Workout;
 
 public class WorkoutTest {
+<<<<<<< HEAD
 	
 //	TODO ask TA why this doesn't work
+=======
+
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 //	@BeforeEach
 //	void setUp() {
 //		ExerciseCatalog.loadExercises();
 //	}
+<<<<<<< HEAD
 //	
+=======
+	// TODO tear down
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 //	@AfterEach
 //	void tearDown() {
 //		ExerciseCatalog.empty();
 //	}
+<<<<<<< HEAD
 //	
+=======
+	
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	@Test
 	public void createWorkoutTest() {
 		ExerciseCatalog.loadExercises();
@@ -111,6 +125,11 @@ public class WorkoutTest {
 		Workout w = new Workout("Test");
 		w.addLift("Pec Deck", 1, 2, 3);
 		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
+<<<<<<< HEAD
+=======
+
+		//assertEquals(w.toString(), "Workout Test\nCable Rear Delt Fly\nPec Deck\n");
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 		
 		Workout c = w.copy();
 		// tests both the toString and equals of copied workout
@@ -135,7 +154,46 @@ public class WorkoutTest {
 		liftList2.add(lift1);
 		liftList2.add(lift2);
 		
+<<<<<<< HEAD
 		ArrayList<LiftData> liftList1 = w.getLifts();
 		assertEquals(liftList2.toString(), liftList1.toString());
+=======
+		assertEquals(w.removeLift("Doing the Safetey Dance"), false);
+		
+		assertEquals(w.getName(), "Test");
+		
+		//assertEquals(w.toString(), "Workout Test\nCable Rear Delt Fly\n");
+	}
+	
+	@Test
+	public void copyWorkout() {
+		ExerciseCatalog.loadExercises();
+		Workout w = new Workout("Test");
+		w.addLift("Pec Deck", 1, 2, 3);
+		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
+		
+		Workout c = w.copy();
+		assertEquals(w.toString(),c.toString());
+	}
+	
+	@Test
+	public void toArrayList() {
+		ExerciseCatalog.loadExercises();
+		Workout w = new Workout("Test");
+		w.addLift("Pec Deck", 1, 2, 3);
+		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
+		
+		Exercise e1 = new Exercise("Pec Deck", MuscleGroup.CHEST, Intensity.HIGH);
+		Exercise e2 = new Exercise("Cable Rear Delt Fly", MuscleGroup.SHOULDERS, Intensity.HIGH);
+		LiftData test1 = new LiftData(e1, 1, 2, 3);
+		LiftData test2 = new LiftData(e2, 10, 11, 12);
+		
+		ArrayList<LiftData> test= new ArrayList<>();
+		ArrayList<LiftData> test3 = new ArrayList<>();
+		test3.add(test1);
+		test3.add(test2);
+		test = w.toArrayList();
+		assertEquals(test.toString(), test3.toString());
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	}
 }
