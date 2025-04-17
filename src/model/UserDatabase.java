@@ -11,35 +11,39 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.nio.file.Paths;
 
 // Code retrieved from LA2 UserDatabase
 public class UserDatabase {
 	// hashmap with user name as the key and User as the value
 	private ArrayList<User> accounts = new ArrayList<>();
-	
+	private final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+	private final File jsonFile = new File("users.json");
+
 	// load the current users in the file accounts.txt
 	public void loadDatabase() throws FileNotFoundException {
+
+		File fr = new File("users.json");
 		
-		// this file will be formated "userName,password,salt"
-		File fr = new File("accounts.txt");
-		Scanner scanner = new Scanner(fr);
-		
-		while(scanner.hasNextLine()) {
+		/* while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			String[] accountInfo = line.split(",");
 			// create a user an add it to the user map
 			User curUser = new User(accountInfo[0], accountInfo[1]);
+		*/
 
+		// grab user specific JSON object from GUI (call login)
+		// call loadJSON to grab data
 			// TODO generate salt
 			
 			// add the user to the ArrayList of users
 			accounts.add(curUser);			
 		}
-		
-		scanner.close();
-		
 	}
-	
+
+
 	// add user to the database, returns true if successfully creates, false otherwise
 	public boolean addUser(String username, String password) {
 		for (User user : accounts) {
@@ -64,14 +68,7 @@ public class UserDatabase {
 		newUser.setSalt(salt);
 		// add the user to the ArrayList of users
 		accounts.add(newUser);
-		
-		// write the new user to User.txt
-		try(FileWriter fw = new FileWriter("Users.txt", true)){
-			fw.write(encodedUsername + "," + encodedPassword + "," + byteToHex(salt)+"\n");
-		} catch (IOException e) {
-			System.out.println("Error writing to file");
-		}
-		
+
 		return true;
 	}
 	
@@ -80,13 +77,18 @@ public class UserDatabase {
 		for (User user : accounts) {
 			byte[] salt = user.getSalt();
 			String encodedName = encode(username, salt);
-			if (encodedName == user.getUserName()) {
+			if (encodedName.equals(user.getUserName())) {
 				return user;
 			}
 		}
 		return null;
 	}
-	
+
+	public void logout(ArrayList<User> users) {
+		for (User user : users) {
+			if (user)
+		}
+	}
 	// encodes the given string
 	public String encode(String input, byte[] salt) {
 		//
@@ -175,6 +177,25 @@ public class UserDatabase {
 			hex = hex + String.format("%02x", bytes[i]);
 		}
 		return hex;
+	}
+
+	public void saveToJSON() {
+		try {
+			mapper.writeValue(jsonFile, accounts);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void loadFromJSON() {
+		try {
+			if (jsonFile.exists()) {
+				User[] loadedUsers = mapper.readValue(jsonFile, User[].class);
+				accounts = new ArrayList<>(List.of(loadedUsers));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

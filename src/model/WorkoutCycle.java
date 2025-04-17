@@ -24,6 +24,26 @@ public final class WorkoutCycle {
 		return this.name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getNumberWeeks() {
+		return this.numberWeeks;
+	}
+
+	public void setNumberWeeks(int numberWeeks) {
+		this.numberWeeks = numberWeeks;
+	}
+
+	public HashMap<DayOfWeek, Workout> getOneWeek() {
+		return this.oneWeek;
+	}
+
+	public void setOneWeek(HashMap<DayOfWeek, Workout> oneWeek) {
+		this.oneWeek = oneWeek;
+	}
+
 	// adds a single day of workouts to our week
 	public void addWorkout(String d, Workout w) {
 		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
@@ -100,6 +120,10 @@ public final class WorkoutCycle {
 			index++;
 		}
 		return str;
+	}
+
+	public void setFullCycle(ArrayList<HashMap<DayOfWeek, Workout>> fullCycle) {
+		this.fullCycle = fullCycle;
 	}
 
 	@Override

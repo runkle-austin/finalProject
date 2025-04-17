@@ -1,6 +1,8 @@
 // ExerciseAndReps.java
 package model;
 
+import model.Exercise;
+
 import java.util.Objects;
 
 public class LiftData {
@@ -17,12 +19,17 @@ public class LiftData {
 		this.weightInLbs = weightInLbs;
 		this.sets = sets;
 	}
+
+	// Empty Constructor for Jackson
+	public LiftData() {
+	}
 	
 	// GETTERS
 	
 	public String getName() {
 		return this.ex.getName();
 	}
+
 	public Exercise getExercise() {
 		return this.ex;
 	}

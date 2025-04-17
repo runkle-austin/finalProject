@@ -1,5 +1,5 @@
 // User.java
-package src.model;
+package model;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,7 @@ public class User {
 		this.myFullLog = new FullLog();
 	}
 
+	// Empty Constructor for Jackson
 	public User() {
 		this.myFullLog = new FullLog();
 	}

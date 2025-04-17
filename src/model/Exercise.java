@@ -1,5 +1,5 @@
 // Exercise.java
-package src.model;
+package model;
 
 import java.util.Objects;
 
@@ -25,19 +25,25 @@ public final class Exercise {
 		return name;
 	}
 
-	public void setName(String name) {}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	public model.Intensity getIntensity() {
+	public Intensity getIntensity() {
 		return inten;
 	}
 
-	public void setIntensity(model.Intensity inten) {}
+	public void setIntensity(Intensity inten) {
+		this.inten = inten;
+	}
 
 	public model.MuscleGroup getMuscle() {
 		return muscle;
 	}
 
-	public void setMuscle(model.MuscleGroup muscle) {}
+	public void setMuscle(MuscleGroup muscle) {
+		this.muscle = muscle;
+	}
 	
 	@Override
 	public int hashCode() {

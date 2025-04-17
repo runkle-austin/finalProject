@@ -1,6 +1,8 @@
 // Workout.java
 package model;
 
+import model.ExerciseCatalog;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -8,11 +10,17 @@ import java.util.Objects;
 public class Workout {
 	// INSTANCE VARIABLES
 	String name;
-	ArrayList<LiftData> lifts = new ArrayList<>();
+	ArrayList<LiftData> lifts;
 
 	// CONSTRUCTOR
 	public Workout(String name) {
+		this.lifts = new ArrayList<>();
 		this.name = name;
+	}
+
+	// Empty Constructor for Jackson
+	public Workout() {
+		this.lifts = new ArrayList<>();
 	}
 
 	// METHODS
@@ -81,6 +89,14 @@ public class Workout {
 	// get the name of the workout
 	public String getName() {
 		return this.name;
+	}
+
+	public void setLifts(ArrayList<LiftData> lifts) {
+		this.lifts = lifts;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
