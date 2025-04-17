@@ -2,7 +2,12 @@
 package model;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Objects;
+=======
+import java.util.HashSet;
+import java.util.Set;
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 
 // Stores information about a single work out
 public class Workout {
@@ -60,19 +65,29 @@ public class Workout {
 	}
 	
 	// get the lifts in the work out
+<<<<<<< HEAD
 	public ArrayList<LiftData> getLifts() {
 		ArrayList<LiftData> copy = new ArrayList<>();
 		for (LiftData l: lifts) {
 			copy.add(l.copy());
+=======
+	public ArrayList<LiftData> toArrayList() {
+		ArrayList<LiftData> copy = new ArrayList<>();
+		for (LiftData l: lifts) {
+			copy.add(l);
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 		}
 		return copy;
 	}
 	
+<<<<<<< HEAD
 	// getter
 	public ArrayList<LiftData> lifts(){
 		return lifts;
 	}
 	
+=======
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	
 	// get the name of the work out
 	public String getName() {
@@ -88,6 +103,7 @@ public class Workout {
 		return str;
 	}
 
+<<<<<<< HEAD
 	// creates deep copy of lifts
 	public Workout copy() {
 		Workout copy = new Workout(this.name);
@@ -116,6 +132,15 @@ public class Workout {
 	}
 	
 	
+=======
+	public Workout copy() {
+		Workout copy = new Workout(this.name);
+		for (LiftData l: lifts) {
+			copy.addLift(l.getExercise().getName(), l.getReps(), l.getWeight(), l.getSets());
+		}
+		return copy;
+	}
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	
 	
 }

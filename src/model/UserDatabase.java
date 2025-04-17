@@ -111,6 +111,51 @@ public class UserDatabase {
 		}
 	}
 	
+	// ensures that the entered password is strong
+	// returns a string with all of the passwords issues
+	// returns null if the password is strong
+	public String isStrongPassword(String pw) {
+		boolean specialChar = false;
+		boolean captialChar = false;
+		boolean lowerChar   = false;
+		boolean is8Letters  = pw.length() >= 8;
+		
+		String output = "";
+		
+		for (int i = 0; i < pw.length(); i ++) {
+			char cur = pw.charAt(i);
+			// check for special characters 
+			if (!Character.isLetter(cur) && !Character.isDigit(cur) && !Character.isWhitespace(cur)) {
+				specialChar = true;
+			}
+			// check for capital letters
+			if (Character.isUpperCase(cur)) {
+				captialChar = true;
+			}
+			// check for lower case letters
+			if (Character.isLowerCase(cur)) {
+				lowerChar = true;
+			}
+		}
+		
+		if (!specialChar) {
+			output += "Missing special character\n";
+		} 
+		if (!captialChar) {
+			output += "Missing capital character\n";
+		}
+		if (!lowerChar) {
+			output += "Missing lower character\n";
+		}
+		if (!is8Letters) {
+			output += "Needs to be more than 8 letters\n";
+		}
+		
+		
+		//returns true only if all conditions are met
+		return output;
+	}
+	
 	// converts the hexadecimal values into bytes so that the salt can be used
 	public byte[] hexToByte(String hex) {
 		// convert the hex string into a byte array

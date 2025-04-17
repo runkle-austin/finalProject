@@ -12,8 +12,11 @@ public final class WorkoutCycle {
 	private String name;
 	private int numberWeeks;
 	private HashMap<DayOfWeek, Workout> oneWeek = new HashMap<DayOfWeek, Workout>();
+<<<<<<< HEAD
 	private ArrayList<HashMap<DayOfWeek, Workout>> fullCycle;
 	
+=======
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	
 	public WorkoutCycle(String name, int numberWeeks) {
 		this.name = name;
@@ -57,6 +60,7 @@ public final class WorkoutCycle {
 		deloadWeek(oneWeek);
 	}
 	
+<<<<<<< HEAD
 	// Implementation of deload week (last week gets 60% of weight and 3 less reps) 
 	public void deloadWeek(HashMap<DayOfWeek, Workout> weekOne) {
 		HashMap<DayOfWeek, Workout> thisWeek = new HashMap<>();
@@ -96,6 +100,33 @@ public final class WorkoutCycle {
 						l.setReps(l.getReps() + (3 * i));
 						break;
 					
+=======
+	public ArrayList<HashMap<DayOfWeek, Workout>> createFullCycle() {
+		ArrayList<HashMap<DayOfWeek, Workout>> fullCycle = new ArrayList<>(numberWeeks);
+		// fill the array list with template weeks
+		for (int i = 0; i < numberWeeks; i ++) {
+			HashMap<DayOfWeek, Workout> thisWeek = updateWeek(oneWeek, i);
+			fullCycle.add(thisWeek);
+		}
+
+		return fullCycle;
+	}
+	
+	// return the updated week based on week number
+	private HashMap<DayOfWeek, Workout> updateWeek(HashMap<DayOfWeek, Workout> inputWeek, int i) {
+		HashMap<DayOfWeek, Workout> thisWeek = new HashMap<>();
+		for (DayOfWeek day: inputWeek.keySet()) {
+			Workout thisDay = inputWeek.get(day).copy();
+			// gets set of lifts in a days workout
+			for (LiftData l: thisDay.toArrayList()) {
+				Intensity intes = l.getExercise().getIntensity();
+				if (Intensity.HIGH.equals(intes)) {
+					l.setReps(l.getReps() + 1);
+				} else if (Intensity.MEDIUM.equals(intes)) {
+					l.setReps(l.getReps() + 2);
+				} else if (Intensity.LOW.equals(intes)) {
+					l.setReps(l.getReps() + 2);
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 				}
 			}
 			thisWeek.put(day, thisDay);
@@ -103,6 +134,7 @@ public final class WorkoutCycle {
 		return thisWeek;
 	}
 
+<<<<<<< HEAD
 
 	public String getFullCycle() {
 		String str = "Full Cycle\n";
@@ -116,6 +148,8 @@ public final class WorkoutCycle {
 
 
 	//TODO do we want to replace the toString with getFullCycle()?
+=======
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	@Override
 	public String toString() {
 		if (oneWeek.isEmpty()) {
@@ -124,9 +158,15 @@ public final class WorkoutCycle {
 		String str = "Workout " + this.getName() + "\n";
 		for (DayOfWeek day: DayOfWeek.values()) {
 			if (oneWeek.get(day) == null) {
+<<<<<<< HEAD
 				str += "  ==== " + day + " ==== \nREST DAY\n";
 			} else {
 				str += " ==== " + day + " ---> " + oneWeek.get(day).toString();
+=======
+				str = str + "  ==== " + day + " ==== \nREST DAY\n";
+			} else {
+				str = str + " ==== " + day + " ---> " + oneWeek.get(day).toString();
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 			}
 		}
 		return str;

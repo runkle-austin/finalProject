@@ -32,6 +32,7 @@ public class WorkoutCycleTest {
 		w.addLift("Pec Deck", 1, 2, 3);
 		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
 		cw.addWorkout("MONDAY", w);
+<<<<<<< HEAD
 		String str = "Workout Test1\n"
 				+ " ==== MONDAY ---> Workout Test\n"
 				+ "Pec Deck, reps = 1, weight = 2.0, sets = 3\n"
@@ -49,6 +50,16 @@ public class WorkoutCycleTest {
 				+ "  ==== SUNDAY ==== \n"
 				+ "REST DAY\n";
 		assertEquals(cw.toString(), str);
+=======
+		String output = cw.toString();
+		// TODO
+		assertEquals(cw.toString(), output);
+		assertEquals(cw.removeWorkoutByDay("Tuesday"), false);
+		assertEquals(cw.removeWorkoutByDay("Monday"), true);
+		
+		assertEquals(cw.toString(), "Workout cycle is empty \n");
+		
+>>>>>>> bc12d243156b0c0e0045e06f86fbce2e64fd688b
 	}
 	
 	@Test
