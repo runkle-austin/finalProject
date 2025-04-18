@@ -1,15 +1,11 @@
 // UserDatabaseTest.java
 package tests;
 
-import static org.junit.Assert.assertEquals;
 
-import model.User;
 import org.junit.jupiter.api.Test;
 import model.UserDatabase;
 
 public class UserDatabaseTest {
-	
-	private UserDatabase db;
 
 
 //	@Test
@@ -24,7 +20,7 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testCreateUser() {
-		db = new UserDatabase();
+        UserDatabase db = new UserDatabase();
 		db.addUser("a", "b");
 		db.saveToJSONFile();
 	}
