@@ -5,7 +5,6 @@ package model;
 
 import java.time.DayOfWeek;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
 
 public final class WorkoutCycle {
@@ -141,4 +140,9 @@ public final class WorkoutCycle {
 		}
 		return str;
 	}
+
+	public ArrayList<HashMap<DayOfWeek, Workout>> getFullCycleData() {
+		return this.fullCycle;
+	}
+
 }

@@ -1,7 +1,6 @@
 // Workout.java
 package model;
 
-import model.ExerciseCatalog;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,18 +26,21 @@ public class Workout {
 
 	// add a lift to the set of lifts, returns true if successful, false if not
 	public boolean addLift(String exName, int reps, double weight, int sets) {
-		// retrieve exercise
 		Exercise e = ExerciseCatalog.getExerciseByName(exName);
-		// add data to exercise
+		if (e == null) {
+			System.err.println("Exercise not found: " + exName);
+			return false;
+		}
 		LiftData l = new LiftData(e, reps, weight, sets);
-
-		// LiftData has overloaded equals method
 		if (!lifts.contains(l)) {
 			addByIntensity(l);
 			return true;
 		}
 		return false;
 	}
+
+
+	//
 
 	// @pre lift must be unique
 	// adds lift in descending order from highest intensity to lowest
@@ -101,11 +103,11 @@ public class Workout {
 
 	@Override
 	public String toString() {
-		String str = "Workout " + this.name + "\n";
+		StringBuilder str = new StringBuilder("Workout " + this.name + "\n");
 		for (LiftData l : lifts) {
-			str = str + l.toString();
+			str.append(l.toString());
 		}
-		return str;
+		return str.toString();
 	}
 
 	// creates deep copy of workout

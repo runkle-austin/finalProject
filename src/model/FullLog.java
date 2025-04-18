@@ -1,45 +1,71 @@
-/* FullLog.java
- *
- * Class that handles all of user's data within the app,
- * tracking workouts, exercises and lift data.
- */
 package model;
 
+import observer.WorkoutObservable;
+import observer.WorkoutObserver;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class FullLog {
+public class FullLog implements WorkoutObservable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
+    private WorkoutCycle activeCycle;
+    private final List<WorkoutObserver> observers;
 
-    //Constructor for FullLog
     public FullLog() {
         this.myWorkoutCycles = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
-    // Getter for FullLog
-    // TODO: Fix Encapsulation
     public ArrayList<WorkoutCycle> getMyWorkoutCycles() {
         return myWorkoutCycles;
     }
 
     public void setMyWorkoutCycles(ArrayList<WorkoutCycle> myWorkoutCycles) {
         this.myWorkoutCycles = myWorkoutCycles;
+        notifyObservers();
     }
 
-    // Add a WorkoutCycle to Log
     public boolean addWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.size() < 8) {
             myWorkoutCycles.add(workoutCycle);
+            notifyObservers();
             return true;
         }
         return false;
     }
 
-    // Remove a WorkoutCycle to Log
     public boolean removeWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.contains(workoutCycle)) {
             myWorkoutCycles.remove(workoutCycle);
+            notifyObservers();
             return true;
         }
         return false;
+    }
+
+    public void setActiveCycle(WorkoutCycle wc) {
+        this.activeCycle = wc;
+        notifyObservers();
+    }
+
+    public WorkoutCycle getActiveCycle() {
+        return this.activeCycle;
+    }
+
+    @Override
+    public void addObserver(WorkoutObserver o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(WorkoutObserver o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (WorkoutObserver o : observers) {
+            o.modelChanged();
+        }
     }
 }
