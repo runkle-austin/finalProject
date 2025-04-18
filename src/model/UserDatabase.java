@@ -1,5 +1,6 @@
 // UserDatavase.java
-package model;
+
+import model.*;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -50,11 +51,13 @@ import java.util.ArrayList;
 		return null;
 	}
 
-	public void logout(ArrayList<User> users) {
+	/* public void logout(ArrayList<User> users) {
 		for (User user : users) {
 			if (user)
 		}
 	}
+	*/
+
 	// encodes the given string
 	public String encode(String input, byte[] salt) {
 		//
@@ -163,5 +166,12 @@ import java.util.ArrayList;
 			e.printStackTrace();
 		}
 	}
-	
-}
+
+        public void main() {
+        }
+
+
+
+
+
+
