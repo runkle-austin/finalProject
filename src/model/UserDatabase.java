@@ -1,50 +1,16 @@
 // UserDatavase.java
 package model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import java.nio.file.Paths;
 
 // Code retrieved from LA2 UserDatabase
-public class UserDatabase {
-	// hashmap with user name as the key and User as the value
-	private ArrayList<User> accounts = new ArrayList<>();
-	private final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-	private final File jsonFile = new File("users.json");
-
-	// load the current users in the file accounts.txt
-	public void loadDatabase() throws FileNotFoundException {
-
-		File fr = new File("users.json");
-		
-		/* while(scanner.hasNextLine()) {
-			String line = scanner.nextLine();
-			String[] accountInfo = line.split(",");
-			// create a user an add it to the user map
-			User curUser = new User(accountInfo[0], accountInfo[1]);
-		*/
-
-		// grab user specific JSON object from GUI (call login)
-		// call loadJSON to grab data
-			// TODO generate salt
-			
-			// add the user to the ArrayList of users
-			accounts.add(curUser);			
-		}
-	}
 
 
-	// add user to the database, returns true if successfully creates, false otherwise
+// add user to the database, returns true if successfully creates, false otherwise
 	public boolean addUser(String username, String password) {
 		for (User user : accounts) {
 			byte[] salt = user.getSalt();
