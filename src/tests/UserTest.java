@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import model.User;
 
 public class UserTest {
-	
 	@Test
 	public void testUserCreation() {
 		User u = new User("Danny Devito", "AlwaysSunny");

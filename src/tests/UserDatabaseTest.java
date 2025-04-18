@@ -7,7 +7,6 @@ import model.UserDatabase;
 
 public class UserDatabaseTest {
 
-
 //	@Test
 //	public void testPassword() {
 //		db = new UserDatabase();

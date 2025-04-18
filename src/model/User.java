@@ -25,11 +25,6 @@ public class User {
 		this.myFullLog = new FullLog();
 	}
 
-	// Empty Constructor for Jackson
-	public User() {
-		this.myFullLog = new FullLog();
-	}
-	
 	// METHODS
 	public byte[] getSalt() {
 		return this.salt;

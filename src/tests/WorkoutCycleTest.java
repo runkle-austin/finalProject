@@ -12,17 +12,6 @@ import model.Workout;
 import model.WorkoutCycle;
 
 public class WorkoutCycleTest {
-
-//	@BeforeEach
-//	void setUp() {
-//		ExerciseCatalog.loadExercises();
-//	}
-//
-//	@AfterEach
-//	void tearDown() {
-//		ExerciseCatalog.empty();
-//	}
-
 	@Test
 	public void testAddWorkout() {
 		ExerciseCatalog.loadExercises();

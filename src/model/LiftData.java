@@ -20,10 +20,6 @@ public class LiftData {
 		this.sets = sets;
 	}
 
-	// Empty Constructor for Jackson
-	public LiftData() {
-	}
-	
 	// GETTERS
 	
 	public String getName() {

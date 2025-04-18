@@ -15,20 +15,6 @@ import model.Workout;
 
 public class WorkoutTest {
 
-//	TODO ask TA why this doesn't work
-
-//	@BeforeEach
-//	void setUp() {
-//		ExerciseCatalog.loadExercises();
-//	}
-
-	// TODO tear down
-
-//	@AfterEach
-//	void tearDown() {
-//		ExerciseCatalog.empty();
-//	}
-
 	@Test
 	public void createWorkoutTest() {
 		ExerciseCatalog.loadExercises();
@@ -42,6 +28,26 @@ public class WorkoutTest {
 		assertEquals(w.toString(), "Workout Test\n"
 				+ "Pec Deck, reps = 1, weight = 2.0, sets = 3\n"
 				+ "Cable Rear Delt Fly, reps = 10, weight = 11.0, sets = 12\n");
+	}
+
+	@Test
+	public void testEquals(){
+		ExerciseCatalog.loadExercises();
+		Workout w1 = new Workout("Test");
+		Workout w2 = new Workout("Test");
+		Workout w3 = new Workout("NOT TEST");
+		Object obj = new Object();
+
+		assertEquals(w1,w1);
+
+		assertEquals(w1, w2);
+		assertEquals(w1.hashCode(), w2.hashCode());
+		assertNotEquals(w1, w3);
+		assertNotEquals(w1.hashCode(), w3.hashCode());
+		assertNotEquals(w1, obj);
+		assertNotEquals(w1, null);
+
+
 	}
 
 	@Test
@@ -168,4 +174,39 @@ public class WorkoutTest {
 		ArrayList<LiftData> test = w.toArrayList();
 		assertEquals(test.toString(), test3.toString());
 	}
+
+	@Test
+	public void setLifts(){
+		ExerciseCatalog.loadExercises();
+		Workout w = new Workout("Test");
+
+		Exercise e1 = new Exercise("Pec Deck", MuscleGroup.CHEST, Intensity.HIGH);
+		Exercise e2 = new Exercise("Cable Rear Delt Fly", MuscleGroup.SHOULDERS, Intensity.HIGH);
+		LiftData test1 = new LiftData(e1, 1, 2, 3);
+		LiftData test2 = new LiftData(e2, 10, 11, 12);
+
+		ArrayList<LiftData> arr = new ArrayList<>();
+		arr.add(test1);
+		arr.add(test2);
+
+		w.setLifts(arr);
+
+		String str = "Workout Test\n"
+				+ "Pec Deck, reps = 1, weight = 2.0, sets = 3\n"
+				+ "Cable Rear Delt Fly, reps = 10, weight = 11.0, sets = 12\n";
+		assertEquals(w.getLifts(), arr);
+		assertEquals(str, w.toString());
+	}
+
+	@Test
+	public void setName(){
+		ExerciseCatalog.loadExercises();
+		Workout w = new Workout("Test");
+
+		w.setName("New test");
+
+		String str = "Workout New test\n";
+		assertEquals(str, w.toString());
+	}
+
 }

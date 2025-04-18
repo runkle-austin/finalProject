@@ -18,11 +18,6 @@ public class Workout {
 		this.name = name;
 	}
 
-	// Empty Constructor for Jackson
-	public Workout() {
-		this.lifts = new ArrayList<>();
-	}
-
 	// METHODS
 
 	// add a lift to the set of lifts, returns true if successful, false if not

@@ -17,32 +17,17 @@ public final class Exercise {
 		this.inten = inten;
 	}
 
-	public Exercise() {
-	}
-
 	// METHODS
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Intensity getIntensity() {
 		return inten;
 	}
 
-	public void setIntensity(Intensity inten) {
-		this.inten = inten;
-	}
-
 	public model.MuscleGroup getMuscle() {
 		return muscle;
-	}
-
-	public void setMuscle(MuscleGroup muscle) {
-		this.muscle = muscle;
 	}
 	
 	@Override
