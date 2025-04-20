@@ -1,14 +1,14 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import model.ExerciseCatalog;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ExerciseCatalogTest {
 	@Test
-	void testLoadExcersices() {
+    public void testLoadExcersices() {
 		ExerciseCatalog.loadExercises();
 		assertEquals("Push Ups, CHEST, LOW\n", ExerciseCatalog.getExerciseByName("Push Ups").toString());
 	}

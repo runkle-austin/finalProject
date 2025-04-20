@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 
 public class UserDatabaseTest {
 
-
 //	@Test
 //	public void testPassword() {
 //		db = new UserDatabase();

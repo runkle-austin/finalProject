@@ -9,19 +9,19 @@ import java.util.Scanner;
 
 // Stores information about all of the available exercises
 public final class ExerciseCatalog {
-	 /* INSTANCE VARIABLES
-	 * each exercise is guaranteed to be unique 
-	 */ 
+	/* INSTANCE VARIABLES
+	 * each exercise is guaranteed to be unique
+	 */
 	static ArrayList<Exercise> exercises = new ArrayList<>();
-	
+
 	// CONSTRUCTOR
 	public static void loadExercises() {
 		File file = new File("exerciseCatalog.txt");
 		Scanner scanner;
-		
+
 		try {
 			scanner = new Scanner(file);
-			while(scanner.hasNextLine()) {
+			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				exercises.add(createExercise(line.split(", ")));
 			}
@@ -29,20 +29,20 @@ public final class ExerciseCatalog {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static Exercise createExercise(String[] line) {
-		String name  = line[0].strip();
+		String name = line[0].strip();
 		String group = line[1].strip();
 		String intes = line[2].strip();
-		
+
 		MuscleGroup muscleGroup = muscleGroupEnum(group);
 		Intensity intensity = intensityEnum(intes);
 		return new Exercise(name, muscleGroup, intensity);
 	}
-	
+
 
 	public static Intensity intensityEnum(String intes) {
-		switch(intes.toUpperCase()) {
+		switch (intes.toUpperCase()) {
 			case "LOW":
 				return Intensity.LOW;
 			case "MED":
@@ -51,9 +51,9 @@ public final class ExerciseCatalog {
 				return Intensity.HIGH;
 		}
 	}
-	
+
 	public static MuscleGroup muscleGroupEnum(String muscle) {
-		switch(muscle) {
+		switch (muscle) {
 			case "Chest":
 				return MuscleGroup.CHEST;
 			case "Back":
@@ -70,29 +70,24 @@ public final class ExerciseCatalog {
 				return MuscleGroup.MISC;
 		}
 	}
-	
+
 	// This method writes the Exercises back to ExerciseCatalog.txt
-	public static void uploadExcercises() {
-		try(FileWriter fw = new FileWriter("ExerciseCatalog.txt", true)){
-			for (Exercise e: exercises) {
-				fw.write(e.toString());
-			}
-		} catch (IOException e) {
-			System.out.println("Error writing to file");
-		}
-	}
-	
+//	public static void uploadExcercises() {
+//		try (FileWriter fw = new FileWriter("ExerciseCatalog.txt", true)) {
+//			for (Exercise e : exercises) {
+//				fw.write(e.toString());
+//			}
+//		} catch (IOException e) {
+//			System.out.println("Error writing to file");
+//		}
+//	}
+
 	public static Exercise getExerciseByName(String name) {
-		for(Exercise ex: exercises) {
+		for (Exercise ex : exercises) {
 			if (ex.getName().equals(name)) {
 				return ex;
 			}
 		}
 		return null;
-	}
-	
-	// helper method for testing
-	public static void empty() {
-		exercises = new ArrayList<>();
 	}
 }

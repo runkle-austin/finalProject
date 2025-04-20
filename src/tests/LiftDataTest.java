@@ -17,20 +17,20 @@ public class LiftDataTest {
 		Exercise e = new Exercise("Pull up", MuscleGroup.BACK, Intensity.MEDIUM);
 		LiftData l = new LiftData(e, 10, 0.0, 3);
 		assertEquals(l.getExercise(), e);
-		assertEquals(l.getReps(), 10);
+		assertEquals(10, l.getReps());
 		// This was done because assertEquals does not work with doubles
-		assertEquals(l.getWeightInLbs() + "", 0.0 + "");
-		assertEquals(l.getSets(), 3);
+		assertEquals(0.0 + "", l.getWeightInLbs() + "");
+		assertEquals(3, l.getSets());
 		
 		// adjust values
 		l.setReps(12);
 		l.setWeightInLbs(2.5);
 		l.setSets(4);
 		
-		assertEquals(l.getReps(), 12);
+		assertEquals(12, l.getReps());
 		// This was done because assertEquals does not work with doubles
-		assertEquals(l.getWeightInLbs() + "", 2.5 + "");
-		assertEquals(l.getSets(), 4);
+		assertEquals(2.5 + "", l.getWeightInLbs() + "");
+		assertEquals(4, l.getSets());
 	}
 	
 	@Test
