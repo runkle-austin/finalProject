@@ -18,6 +18,19 @@ public class UserDatabase {
 	private ArrayList<User> accounts = new ArrayList<>();
 	private final File jsonFile = new File("users.json");
 
+	// Login function to grab specific User Data
+	public User login(String username, String pw) {
+		for (User user : accounts) {
+			byte[] salt = user.getSalt();
+			String encodedName = encode(username, salt);
+			String encodedPw = encode(pw, salt);
+			if (encodedName.equals(user.getUserName()) && encodedPw.equals(user.getPassword()) ) {
+				return user;
+			}
+		}
+		return null;
+	}
+
 	public void saveToJSONFile() {
 		JSONArray userArray = new JSONArray();
 		for (User user : accounts) {
@@ -78,6 +91,13 @@ public class UserDatabase {
 	//ADDING A USER
 	public boolean addUser(String username, String password) {
 		// checking if the user alr exists in the accounts
+
+		// ToDo: Add isStrongPassword to check if Password is good enough
+		if (isStrongPassword(password).equals("")) {
+			// Display it to the user
+			return false;
+		}
+
 		for (User user : accounts) {
 			String encodedUsername = encode(username, user.getSalt());
 			if (encodedUsername.equals(user.getUserName())) {
@@ -117,6 +137,43 @@ public class UserDatabase {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	// Extra functionality for user password protection.
+	public String isStrongPassword(String pw) {
+		boolean specialChar = false;
+		boolean capitalChar = false;
+		boolean lowerChar  = false;
+		boolean isEightLetters = pw.length() >= 8;
+
+		String output = "";
+
+		for (int i = 0; i < pw.length(); i++) {
+			char cur = pw.charAt(i);
+			if (!Character.isLetter(cur) && !Character.isDigit(cur) && !Character.isWhitespace(cur)) {
+				specialChar = true;
+			}
+			if (Character.isUpperCase(cur)) {
+				capitalChar = true;
+			}
+			if (Character.isLowerCase(cur)) {
+				lowerChar = true;
+			}
+		}
+		if (!specialChar) {
+			output += "Missing special character\n";
+		}
+		if (!capitalChar) {
+			output += "Missing capital character\n";
+		}
+		if (!lowerChar) {
+			output += "Missing lower character\n";
+		}
+		if (!isEightLetters) {
+			output += "Needs to be more than eight letters\n";
+		}
+
+		return output;
 	}
 
 
