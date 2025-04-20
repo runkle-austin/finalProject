@@ -71,17 +71,6 @@ public final class ExerciseCatalog {
 		}
 	}
 
-	// This method writes the Exercises back to ExerciseCatalog.txt
-//	public static void uploadExcercises() {
-//		try (FileWriter fw = new FileWriter("ExerciseCatalog.txt", true)) {
-//			for (Exercise e : exercises) {
-//				fw.write(e.toString());
-//			}
-//		} catch (IOException e) {
-//			System.out.println("Error writing to file");
-//		}
-//	}
-
 	public static Exercise getExerciseByName(String name) {
 		for (Exercise ex : exercises) {
 			if ((ex.getName()).equalsIgnoreCase(name)) {

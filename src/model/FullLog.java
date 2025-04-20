@@ -2,6 +2,7 @@ package model;
 
 import observer.WorkoutObservable;
 import observer.WorkoutObserver;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +10,61 @@ import java.util.List;
 public class FullLog implements WorkoutObservable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
     private WorkoutCycle activeCycle;
-    private final List<WorkoutObserver> observers;
+    private ArrayList<Exercise> myExercises;    // this is only exercises that aren't in the catalog
+    private ArrayList<Workout> myWorkouts;
+    private final List<WorkoutObserver> observers = new ArrayList<>();;
 
     public FullLog() {
         this.myWorkoutCycles = new ArrayList<>();
-        this.observers = new ArrayList<>();
+        this.myExercises = new ArrayList<>();
+        this.myWorkouts = new ArrayList<>();
         createDefaultWorkouts();
     }
 
+    public FullLog(ArrayList<WorkoutCycle> myWorkoutCycles, ArrayList<Exercise> myExercises, ArrayList<Workout> myWorkouts) {
+        this.myWorkoutCycles = myWorkoutCycles;
+        this.myExercises = myExercises;
+        this.myWorkouts = myWorkouts;
+    }
+
+    // returns deep copy
+    public ArrayList<Workout> getMyWorkouts(){
+        ArrayList<Workout> workouts = new ArrayList<>();
+        for(Workout curr: myWorkouts){
+            workouts.add(curr.getCopy());
+        }
+        return workouts;
+    }
+
+    public void setMyWorkouts(ArrayList<Workout> workouts){
+        myWorkouts = workouts;
+    }
+
+    // max of 8 workouts, returns true if successfully added, false otherwise
+    public boolean addWorkout(Workout workout){
+        if (myWorkouts.size() < 8) {
+            myWorkouts.add(workout);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Exercise> getMyExercises() {
+        return (ArrayList<Exercise>) myExercises.clone();
+    }
+
+    public void setMyExercises(ArrayList<Exercise> myNewExercises) {
+        this.myExercises = myNewExercises;
+    }
+
+    // creates a new exercise
+    // @pre - only use if exercise was not found in exerciseCatalog
+    public void addExercise(String name, MuscleGroup muscle, Intensity inten) {
+        Exercise newExercise = new Exercise(name, muscle, inten);
+        myExercises.add(newExercise);
+    }
+
+    // TODO escaping ref
     public ArrayList<WorkoutCycle> getMyWorkoutCycles() {
         return myWorkoutCycles;
     }

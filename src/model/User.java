@@ -1,23 +1,18 @@
 // User.java
 package model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
 // This class stores all of the information about a user
-public class User {
+public class User implements Serializable {
 	// INSTANCE VARIABLES
 	private String userName;
 	private String password;
 	private byte[] salt;
+	// contains info about a users workout cycles and exercises
 	private FullLog myFullLog;
+	private static final long serialVersionUID = 1L;
 
-	/*
-	TODO do we want to change this to a integer, or figure out another way to do this that way
-	   we can easily turn this class into a json file?
-
-	   I didnt do this for LA 2 so im def going to be relying on you guys here
-	*/
-	
 	// CONSTRUCTOR
 	public User(String name, String pw) {
 		this.userName = name;

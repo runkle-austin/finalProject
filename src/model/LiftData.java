@@ -3,14 +3,16 @@ package model;
 
 import model.Exercise;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class LiftData {
+public class LiftData implements Serializable {
 	// INSTANCE VARIABLES
 	private Exercise ex;
 	private int reps;
 	private double weightInLbs;
 	private int sets;
+	private static final long serialVersionUID = 1L;
 	
 	// CONSTRUCTOR
 	public LiftData(Exercise ex, int reps, double weightInLbs, int sets) {

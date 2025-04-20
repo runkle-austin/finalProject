@@ -2,14 +2,16 @@
 package model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 // Stores information about a single work out
-public class Workout {
+public class Workout implements Serializable {
 	// INSTANCE VARIABLES
-	String name;
-	ArrayList<LiftData> lifts;
+	private String name;
+	private ArrayList<LiftData> lifts;
+	private static final long serialVersionUID = 1L;
 
 	// CONSTRUCTOR
 	public Workout(String name) {
@@ -66,6 +68,13 @@ public class Workout {
 		for (LiftData l : lifts) {
 			copy.add(l.copy());
 		}
+		return copy;
+	}
+
+	public Workout getCopy(){
+		Workout copy = new Workout(name);
+		// sets lifts to deep copy
+		copy.setLifts(this.getLifts());
 		return copy;
 	}
 

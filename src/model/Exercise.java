@@ -1,14 +1,17 @@
 // Exercise.java
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 // store information about each song
-public final class Exercise {
+// note that this class is immutable
+public final class Exercise implements Serializable {
 	// INSTANCE VARIABLES
 	private model.MuscleGroup muscle;
 	private model.Intensity inten;
 	private String name;
+	private static final long serialVersionUID = 1L;
 	
 	// CONSTRUCTOR
 	public Exercise(String name, model.MuscleGroup muscle, model.Intensity inten) {

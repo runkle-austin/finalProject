@@ -13,7 +13,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
 
-// Code retrieved from LA2 UserDatabase
+// Code adapted from LA2 UserDatabase
 public class UserDatabase {
 	private ArrayList<User> accounts = new ArrayList<>();
 	private final File jsonFile = new File("users.json");
@@ -40,6 +40,8 @@ public class UserDatabase {
 			//JSON does not hold bytes[] well so we will store in base64
 			// (since it is easy to use and built in)
 			userInfo.put("salt", Base64.getEncoder().encodeToString(user.getSalt()));
+			// puts user's fullLog into json
+			userInfo.put("fullLog", user.getMyFullLog());
 			userArray.put(userInfo);
 		}
 		try(FileWriter fw = new FileWriter(jsonFile)) {
@@ -55,23 +57,26 @@ public class UserDatabase {
 			return;
 		}
 		try{
-			String JSONString = new String(Files.readAllBytes(jsonFile.toPath()));
-
-			JSONArray jsonArray = new JSONArray(JSONString);
 			//removing previous accounts so no duplicates
 			accounts.clear();
 
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject user = jsonArray.getJSONObject(i);
+			String JSONString = new String(Files.readAllBytes(jsonFile.toPath()));
 
-				String userName = user.getString("userName");
-				String password = user.getString("password");
-				String salt = user.getString("salt");
+			JSONArray jsonArray = new JSONArray(JSONString);
+
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonUser = jsonArray.getJSONObject(i);
+
+				String userName = jsonUser.getString("userName");
+				String password = jsonUser.getString("password");
+				String salt = jsonUser.getString("salt");
+				//JSONObject jsonFullLog = jsonUser.getJSONObject("fullLog");
+				//FullLog fullLog = new FullLog(jsonFullLog);
 
 				byte[] saltBytes = Base64.getDecoder().decode(salt);
-				User u = new User(userName, password);
-				u.setSalt(saltBytes);
-				accounts.add(u);
+				User user = new User(userName, password);
+				user.setSalt(saltBytes);
+				accounts.add(user);
 			}
 		}
 		catch (IOException e){
@@ -105,7 +110,7 @@ public class UserDatabase {
 		new SecureRandom().nextBytes(salt);
 
 		// encode both username and password with salt
-		// this is how i saw online for guides to doing databases of users
+		// this is how I saw online for guides to doing databases of users
 		String encodedUsername = encode(username, salt);
 		String encodedPassword = encode(password, salt);
 

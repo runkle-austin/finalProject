@@ -3,15 +3,17 @@
 
 package model;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public final class WorkoutCycle {
+public final class WorkoutCycle implements Serializable {
 	private String name;
 	private int numberWeeks;
 	private HashMap<DayOfWeek, Workout> oneWeek = new HashMap<>();
 	private ArrayList<HashMap<DayOfWeek, Workout>> fullCycle;
+	private static final long serialVersionUID = 1L;
 
 	public WorkoutCycle(String name, int numberWeeks) {
 		this.name = name;

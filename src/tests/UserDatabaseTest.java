@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import model.UserDatabase;
 import org.junit.jupiter.api.TestTemplate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class UserDatabaseTest {
 
@@ -38,6 +37,15 @@ public class UserDatabaseTest {
 		assertEquals(db.addUser("a", "a"), false);
 		// good password
 		assertEquals(db.addUser("asdfghjk", "qwertyuiop1234567890-"), true);
+	}
+
+	@Test
+	public void testBadLogin() {
+		UserDatabase db = new UserDatabase();
+		db.addUser("me", "qwertyuiop1234567890-");
+		db.saveToJSONFile();
+		// test wrong password
+		assertNull(db.login("me", "notCorrectPassword"));
 	}
 
 	@Test
