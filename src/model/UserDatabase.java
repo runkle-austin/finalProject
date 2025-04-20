@@ -52,7 +52,6 @@ public class UserDatabase {
 
 	public void loadFromJSONFile() {
 		if(!jsonFile.exists()) {
-			System.out.println("File does not exist");
 			return;
 		}
 		try{
@@ -74,24 +73,18 @@ public class UserDatabase {
 				u.setSalt(saltBytes);
 				accounts.add(u);
 			}
-
-			//DEBUG
-			System.out.println("Loaded " + accounts.size() + " users");
 		}
 		catch (IOException e){
-			System.out.println("Error reading user data file:");
-			e.printStackTrace();
-		}
-		catch (Exception e){
-			System.out.println("Error parsing user data:");
 			e.printStackTrace();
 		}
 	}
+
 
 	//ADDING A USER
 	public boolean addUser(String username, String password) {
 		// checking if the user alr exists in the accounts
 
+		// TODO probably split into mult method
 		// ToDo: Add isStrongPassword to check if Password is good enough
 		if (isStrongPassword(password).equals("")) {
 			// Display it to the user
@@ -101,7 +94,8 @@ public class UserDatabase {
 		for (User user : accounts) {
 			String encodedUsername = encode(username, user.getSalt());
 			if (encodedUsername.equals(user.getUserName())) {
-				System.out.println("User already exists.");
+				// TODO send info to GUI
+				//System.out.println("User already exists.");
 				return false;
 			}
 		}
@@ -120,7 +114,6 @@ public class UserDatabase {
 
 		accounts.add(newUser);
 
-		System.out.println("User created successfully.");
 		return true;
 	}
 

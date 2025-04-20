@@ -36,6 +36,7 @@ public class User {
 	}
 	
 	public String getUserName() {
+		// TODO make decode function that gets the actual username
 		return this.userName;
 	}
 

@@ -84,7 +84,7 @@ public final class ExerciseCatalog {
 
 	public static Exercise getExerciseByName(String name) {
 		for (Exercise ex : exercises) {
-			if (ex.getName().equals(name)) {
+			if ((ex.getName()).equalsIgnoreCase(name)) {
 				return ex;
 			}
 		}

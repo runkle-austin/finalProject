@@ -46,7 +46,7 @@ public class LiftData {
 		return this.weightInLbs;
 	}
 	
-	public double getWeightInKg(double lbs) {
+	public double getWeightInKg() {
 		return this.weightInLbs / 2.20462;
 	}
 	

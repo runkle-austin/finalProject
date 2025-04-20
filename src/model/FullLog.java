@@ -74,7 +74,7 @@ public class FullLog implements WorkoutObservable {
         Workout push = new Workout("push");
         push.addLift("barbell bench press", 0, 0, 0);
         push.addLift("incline barbell press", 0, 0, 0);
-        push.addLift("pec deck ", 0, 0, 0);
+        push.addLift("pec deck", 0, 0, 0);
         push.addLift("dumbbell side raises", 0, 0, 0);
         push.addLift("cable tricep pushdown", 0, 0, 0);
         push.addLift("skullcrushers", 0, 0, 0);
@@ -99,7 +99,7 @@ public class FullLog implements WorkoutObservable {
         Workout chest = new Workout("chest");
         chest.addLift("dumbbell bench press", 0, 0, 0);
         chest.addLift("incline barbell press", 0, 0, 0);
-        chest.addLift("pec deck ", 0, 0, 0);
+        chest.addLift("pec deck", 0, 0, 0);
         chest.addLift("push ups", 0, 0, 0);
         chest.addLift("crunch", 0, 0, 0);
 

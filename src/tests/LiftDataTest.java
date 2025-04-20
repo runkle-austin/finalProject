@@ -11,7 +11,19 @@ import model.MuscleGroup;
 import model.LiftData;
 
 public class LiftDataTest {
-	
+
+	@Test
+	public void testGetters() {
+		Exercise e = new Exercise("Pull up", MuscleGroup.BACK, Intensity.MEDIUM);
+		LiftData l = new LiftData(e, 10, 1, 3);
+
+		assertEquals(l.getName(), "Pull up");
+		assertEquals(l.getMuscleGroup(), MuscleGroup.BACK);
+
+		assertEquals(Double.compare(l.getWeightInKg(), 1/2.20462), 0);
+
+	}
+
 	@Test
 	public void testLiftData() {
 		Exercise e = new Exercise("Pull up", MuscleGroup.BACK, Intensity.MEDIUM);
