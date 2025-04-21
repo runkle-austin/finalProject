@@ -1,7 +1,6 @@
 /* MainApp.java */
 package view;
 
-import controller.WorkoutController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,25 +27,16 @@ public class GUIView extends Application {
         stage.show();
     }
 
-    public void showCreateAccount(Stage stage) {
-        CreateAccountView createView = new CreateAccountView(this, stage);
-        Scene scene = new Scene(createView, 350, 300);
-        stage.setScene(scene);
-        stage.setTitle("Create Account");
-        stage.show();
-    }
-
-    public void showDashboard(Stage stage, User user) {
-        // Initialize your main application view with the authenticated user
+    public void showHomePage(Stage stage, User user) {
+        this.primaryStage = stage;
         FullLog model = user.getMyFullLog();
-        WorkoutController controller = new WorkoutController(model);
-        DashBoardView dashboard = new DashBoardView(model);
-        // build and show the dashboard
-        Scene scene = new Scene(dashboard.getView(), 800, 600);
+        HomePageView home = new HomePageView(model, this, stage);
+        Scene scene = new Scene(home.getView(), 800, 600);
         stage.setScene(scene);
         stage.setTitle("Dashboard - " + user.getUserName());
         stage.show();
     }
+
 
     public UserDatabase getUserDb() {
         return userDb;

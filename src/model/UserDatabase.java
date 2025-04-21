@@ -44,22 +44,14 @@ public class UserDatabase {
 		return null;
 	}
 
+
 	//ADDING A USER
+	// @pre password is valid
 	public boolean createAccount(String username, String password) {
-
-		// TODO probably split into mult method
-		// ToDo: Add isStrongPassword to check if Password is good enough
-		if (isStrongPassword(password).equals("")) {
-			// Display it to the user
-			return false;
-		}
-
 		// checking if the user alr exists in the accounts
 		for (User user : accounts) {
 			String encodedUsername = encode(username, user.getSalt());
 			if (encodedUsername.equals(user.getUserName())) {
-				// TODO send info to GUI
-				//System.out.println("User already exists.");
 				return false;
 			}
 		}

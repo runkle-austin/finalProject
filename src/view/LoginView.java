@@ -24,11 +24,11 @@ public class LoginView extends VBox {
         password.setPromptText("Password");
 
         Button loginBtn = new Button("Login");
-        LoginController controller = new LoginController(app);
+        LoginController controller = new LoginController(app, stage);
         loginBtn.setOnAction(e -> controller.login(username.getText(), password.getText()));
 
         Button createBtn = new Button("Create Account");
-        createBtn.setOnAction(e -> controller.goToCreateAccount());
+        createBtn.setOnAction(e -> controller.createAccount(username.getText(), password.getText()));
 
         getChildren().addAll(title, username, password, loginBtn, createBtn);
     }
