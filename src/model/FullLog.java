@@ -55,25 +55,19 @@ public class FullLog implements WorkoutObservable, Serializable {
         return (ArrayList<Exercise>) myExercises.clone();
     }
 
-    public void setMyExercises(ArrayList<Exercise> myNewExercises) {
-        this.myExercises = myNewExercises;
-    }
-
     // creates a new exercise
     // @pre - only use if exercise was not found in exerciseCatalog
-    public void addExercise(String name, MuscleGroup muscle, Intensity inten) {
-        Exercise newExercise = new Exercise(name, muscle, inten);
+    public void addExercise(String name, String muscle, String inten) {
+        MuscleGroup muscleGroup = MuscleGroup.valueOf(muscle.toUpperCase());
+        Intensity intensity = Intensity.valueOf(inten.toUpperCase());
+        Exercise newExercise = new Exercise(name, muscleGroup, intensity);
         myExercises.add(newExercise);
     }
 
     // TODO escaping ref
     public ArrayList<WorkoutCycle> getMyWorkoutCycles() {
-        return myWorkoutCycles;
-    }
 
-    public void setMyWorkoutCycles(ArrayList<WorkoutCycle> myWorkoutCycles) {
-        this.myWorkoutCycles = myWorkoutCycles;
-        notifyObservers();
+        return myWorkoutCycles;
     }
 
     public boolean addWorkoutCycle(WorkoutCycle workoutCycle) {
