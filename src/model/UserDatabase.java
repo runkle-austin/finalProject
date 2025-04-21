@@ -148,32 +148,6 @@ public class UserDatabase {
 
 		return output;
 	}
-
-
-
-	/*
-	// converts the hexadecimal values into bytes so that the salt can be used
-
-	public byte[] hexToByte(String hex) {
-		// convert the hex string into a byte array
-		byte[] bytes = new byte[hex.length()/2];
-		for (int i = 0; i < bytes.length; i ++) {
-			bytes[i] = (byte)(Integer.parseInt(hex.substring(i * 2, i * 2 + 2), 16));
-		}
-
-		return bytes;
-	}
-
-	// converts the byte array to a string so it can be saved in the Users.txt file
-	public String byteToHex(byte[] bytes) {
-		String hex = "";
-		for (int i = 0; i < bytes.length; i ++) {
-			// convert each byte to hex
-			hex = hex + String.format("%02x", bytes[i]);
-		}
-		return hex;
-	}
-	*/
 }
 
 

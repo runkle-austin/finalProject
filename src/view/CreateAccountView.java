@@ -1,27 +1,29 @@
 package view;
 
 import controller.CreateAccountController;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CreateAccountView extends VBox {
-    public CreateAccountView(Stage stage) {
-        CreateAccountController controller = new CreateAccountController(stage);
-
-        TextField username = new TextField();
-        username.setPromptText("Choose a username");
-
-        PasswordField password = new PasswordField();
-        password.setPromptText("Choose a password");
-
-        Button submitBtn = new Button("Create Account");
-        submitBtn.setOnAction(e -> controller.createAccount(username.getText(), password.getText()));
-
-        Button backBtn = new Button("Back to Login");
-        backBtn.setOnAction(e -> controller.goToLogin(null)); // null = no user created
-
-        getChildren().addAll(new Label("Create Account"), username, password, submitBtn, backBtn);
+    public CreateAccountView(GUIView app, Stage stage) {
+        setPadding(new Insets(20));
         setSpacing(10);
+
+        Label title = new Label("Create New Account");
+        TextField username = new TextField();
+        username.setPromptText("Username");
+        PasswordField password = new PasswordField();
+        password.setPromptText("Password");
+
+        Button createBtn = new Button("Create Account");
+        CreateAccountController controller = new CreateAccountController(app);
+        createBtn.setOnAction(e -> controller.createAccount(username.getText(), password.getText()));
+
+        Button cancelBtn = new Button("Back to Login");
+        cancelBtn.setOnAction(e -> app.showLogin(stage));
+
+        getChildren().addAll(title, username, password, createBtn, cancelBtn);
     }
 }
