@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public final class WorkoutCycle implements Serializable {
 	private String name;
@@ -147,4 +148,15 @@ public final class WorkoutCycle implements Serializable {
 		return this.fullCycle;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		WorkoutCycle that = (WorkoutCycle) o;
+		return numberWeeks == that.numberWeeks && Objects.equals(name, that.name) && Objects.equals(fullCycle, that.fullCycle);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, numberWeeks, fullCycle);
+	}
 }

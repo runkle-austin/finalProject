@@ -1,12 +1,6 @@
 package model;// UserDatabase.java
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -16,7 +10,26 @@ import java.util.Base64;
 // Code adapted from LA2 UserDatabase
 public class UserDatabase {
 	private ArrayList<User> accounts = new ArrayList<>();
-	private final File jsonFile = new File("users.json");
+
+	// this method fills the UserDatabase with the information from previous uses
+	public void loadUsers() {
+		// read from the UserInfo.txt file
+		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("UserInfo.txt"))){
+			// remove any pre-existing users
+			accounts.clear();
+			// get the numbers of users saved in the file
+			int numUsers = input.readInt();
+			// create the user objects from the file information
+			for (int i = 0; i < numUsers; i ++) {
+				User u = (User) input.readObject();
+				accounts.add(u);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// Login function to grab specific User Data
 	public User login(String username, String pw) {
@@ -31,63 +44,8 @@ public class UserDatabase {
 		return null;
 	}
 
-	public void saveToJSONFile() {
-		JSONArray userArray = new JSONArray();
-		for (User user : accounts) {
-			JSONObject userInfo = new JSONObject();
-			userInfo.put("userName", user.getUserName());
-			userInfo.put("password", user.getPassword());
-			//JSON does not hold bytes[] well so we will store in base64
-			// (since it is easy to use and built in)
-			userInfo.put("salt", Base64.getEncoder().encodeToString(user.getSalt()));
-			// puts user's fullLog into json
-			userInfo.put("fullLog", user.getMyFullLog());
-			userArray.put(userInfo);
-		}
-		try(FileWriter fw = new FileWriter(jsonFile)) {
-			fw.write(userArray.toString(4));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void loadFromJSONFile() {
-		if(!jsonFile.exists()) {
-			return;
-		}
-		try{
-			//removing previous accounts so no duplicates
-			accounts.clear();
-
-			String JSONString = new String(Files.readAllBytes(jsonFile.toPath()));
-
-			JSONArray jsonArray = new JSONArray(JSONString);
-
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jsonUser = jsonArray.getJSONObject(i);
-
-				String userName = jsonUser.getString("userName");
-				String password = jsonUser.getString("password");
-				String salt = jsonUser.getString("salt");
-				//JSONObject jsonFullLog = jsonUser.getJSONObject("fullLog");
-				//FullLog fullLog = new FullLog(jsonFullLog);
-
-				byte[] saltBytes = Base64.getDecoder().decode(salt);
-				User user = new User(userName, password);
-				user.setSalt(saltBytes);
-				accounts.add(user);
-			}
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-	}
-
-
 	//ADDING A USER
-	public boolean addUser(String username, String password) {
-		// checking if the user alr exists in the accounts
+	public boolean createAccount(String username, String password) {
 
 		// TODO probably split into mult method
 		// ToDo: Add isStrongPassword to check if Password is good enough
@@ -96,6 +54,7 @@ public class UserDatabase {
 			return false;
 		}
 
+		// checking if the user alr exists in the accounts
 		for (User user : accounts) {
 			String encodedUsername = encode(username, user.getSalt());
 			if (encodedUsername.equals(user.getUserName())) {
@@ -118,9 +77,25 @@ public class UserDatabase {
 		newUser.setSalt(salt);
 
 		accounts.add(newUser);
-
 		return true;
 	}
+
+	// this method updates the UserDatabase with all of the new information
+	public void logout() {
+		// writes the UserInfo.txt file
+		try(ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("UserInfo.txt"))){
+			// write the number of users in the file for the loadUsers method to use
+			output.writeInt(accounts.size());
+			// add all of the users to the file
+			for (User u: accounts) {
+				output.writeObject(u);
+			}
+		} catch (IOException e) {
+			System.out.println("error with updateDatabase");
+		}
+	}
+
+
 
 	public String encode(String input, byte[] salt) {
 		try {
@@ -175,6 +150,30 @@ public class UserDatabase {
 	}
 
 
+
+	/*
+	// converts the hexadecimal values into bytes so that the salt can be used
+
+	public byte[] hexToByte(String hex) {
+		// convert the hex string into a byte array
+		byte[] bytes = new byte[hex.length()/2];
+		for (int i = 0; i < bytes.length; i ++) {
+			bytes[i] = (byte)(Integer.parseInt(hex.substring(i * 2, i * 2 + 2), 16));
+		}
+
+		return bytes;
+	}
+
+	// converts the byte array to a string so it can be saved in the Users.txt file
+	public String byteToHex(byte[] bytes) {
+		String hex = "";
+		for (int i = 0; i < bytes.length; i ++) {
+			// convert each byte to hex
+			hex = hex + String.format("%02x", bytes[i]);
+		}
+		return hex;
+	}
+	*/
 }
 
 

@@ -2,6 +2,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 // This class stores all of the information about a user
 public class User implements Serializable {
@@ -53,5 +54,17 @@ public class User implements Serializable {
 
 	public void setMyFullLog(FullLog myFullLog) {
 		this.myFullLog = myFullLog;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(myFullLog, user.myFullLog);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userName, password, myFullLog);
 	}
 }

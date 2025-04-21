@@ -4,10 +4,12 @@ import observer.WorkoutObservable;
 import observer.WorkoutObserver;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class FullLog implements WorkoutObservable {
+public class FullLog implements WorkoutObservable, Serializable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
     private WorkoutCycle activeCycle;
     private ArrayList<Exercise> myExercises;    // this is only exercises that aren't in the catalog
@@ -188,5 +190,31 @@ public class FullLog implements WorkoutObservable {
         addWorkoutCycle(threeDay);
         addWorkoutCycle(fourDay);
         addWorkoutCycle(fiveDay);
+    }
+
+    /* @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FullLog originalFullLog =  (FullLog) o;
+        if (!originalFullLog.getMyWorkoutCycles().equals(this.getMyWorkoutCycles())) {
+            return false;
+        } else if (!originalFullLog.getMyWorkouts().equals(this.getMyWorkouts()) {
+            return false;
+        }
+            return true;
+    }
+    */
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        FullLog fullLog = (FullLog) o;
+        return Objects.equals(myWorkoutCycles, fullLog.myWorkoutCycles) && Objects.equals(myExercises, fullLog.myExercises) && Objects.equals(myWorkouts, fullLog.myWorkouts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(myWorkoutCycles, myExercises, myWorkouts);
     }
 }
