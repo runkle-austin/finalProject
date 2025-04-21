@@ -25,7 +25,6 @@ public class Workout implements Serializable {
 	public boolean addLift(String exName, int reps, double weight, int sets) {
 		Exercise e = ExerciseCatalog.getExerciseByName(exName);
 		if (e == null) {
-			System.err.println("Exercise not found: " + exName);
 			return false;
 		}
 		LiftData l = new LiftData(e, reps, weight, sets);

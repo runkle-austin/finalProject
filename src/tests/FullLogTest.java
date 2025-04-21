@@ -20,6 +20,20 @@ public class FullLogTest {
     }
 
     @Test
+    public void testEqualsAndHash(){
+        FullLog fullLog1 = new FullLog();
+        FullLog fullLog2 = new FullLog();
+        WorkoutCycle WC1 = new WorkoutCycle("WC", 5);
+        fullLog1.addWorkoutCycle(WC1);
+        WorkoutCycle WC2 = new WorkoutCycle("WC", 5);
+        fullLog2.addWorkoutCycle(WC2);
+
+        assertEquals(fullLog1, fullLog2);
+        assertEquals(fullLog1.hashCode(), fullLog2.hashCode());
+
+    }
+
+    @Test
     public void testConstructor() {
         ExerciseCatalog.loadExercises();
         WorkoutCycle wC = new WorkoutCycle("Test1", 5);

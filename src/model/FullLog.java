@@ -192,20 +192,6 @@ public class FullLog implements WorkoutObservable, Serializable {
         addWorkoutCycle(fiveDay);
     }
 
-    /* @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FullLog originalFullLog =  (FullLog) o;
-        if (!originalFullLog.getMyWorkoutCycles().equals(this.getMyWorkoutCycles())) {
-            return false;
-        } else if (!originalFullLog.getMyWorkouts().equals(this.getMyWorkouts()) {
-            return false;
-        }
-            return true;
-    }
-    */
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

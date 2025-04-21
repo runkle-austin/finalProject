@@ -2,6 +2,7 @@
 package tests;
 
 
+import model.ExerciseCatalog;
 import model.User;
 import model.Workout;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testPassword() {
+		ExerciseCatalog.loadExercises();
 		UserDatabase db = new UserDatabase();
 		assertEquals(db.isStrongPassword("A!b2%s;lkjsdhdssjsdh"), "");
 		assertEquals(db.isStrongPassword("A!b"), "Needs to be more than eight letters\n");
@@ -25,6 +27,7 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testCreateUser() {
+		ExerciseCatalog.loadExercises();
         UserDatabase db = new UserDatabase();
 		db.createAccount("a", "b");
 		// bad password
@@ -35,6 +38,7 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testBadLogin() {
+		ExerciseCatalog.loadExercises();
 		UserDatabase db = new UserDatabase();
 		db.createAccount("me", "qwertyuiop1234567890-");
 		// test wrong password
@@ -43,6 +47,7 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testLogin() {
+		ExerciseCatalog.loadExercises();
 		UserDatabase db = new UserDatabase();
 		db.createAccount("me", "qwertyuiop1234567890-");
 		assertNotNull(db.login("me", "qwertyuiop1234567890-"));
@@ -53,6 +58,7 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testSerializableUser() {
+		ExerciseCatalog.loadExercises();
 		UserDatabase db = new UserDatabase();
 		db.loadUsers();
 		db.createAccount("me", "qwertyuiop1234567890-");
@@ -63,9 +69,10 @@ public class UserDatabaseTest {
 
 	@Test
 	public void testLoadingDataProperly() {
+		ExerciseCatalog.loadExercises();
 		Workout chest =  new Workout("chest");
 		chest.addLift("pec deck", 0, 0, 0);
-		chest.addLift("barbell chest press", 0, 0, 0);
+		chest.addLift("barbell bench press", 0, 0, 0);
 
 		UserDatabase db = new UserDatabase();
 		db.loadUsers();

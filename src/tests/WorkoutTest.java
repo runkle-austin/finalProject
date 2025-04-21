@@ -31,13 +31,24 @@ public class WorkoutTest {
 	}
 
 	@Test
+	public void testAddList(){
+		ExerciseCatalog.loadExercises();
+		Workout w = new Workout("Test");
+		assertTrue(w.addLift("Pec Deck", 1, 2, 3));
+		assertFalse(w.addLift("Nonsense Exercise", 10, 11, 12));
+	}
+
+	@Test
 	public void testEquals(){
 		ExerciseCatalog.loadExercises();
 		Workout w1 = new Workout("Test");
 		Workout w2 = new Workout("Test");
+		w1.addLift("Pec Deck", 1, 2, 3);
+		w2.addLift("Pec Deck", 10, 11, 12);
 		Workout w3 = new Workout("NOT TEST");
 		Object obj = new Object();
 
+		// same name
 		assertEquals(w1,w1);
 
 		assertEquals(w1, w2);
