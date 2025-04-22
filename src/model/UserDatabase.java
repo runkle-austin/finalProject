@@ -13,6 +13,12 @@ public class UserDatabase {
 
 	// this method fills the UserDatabase with the information from previous uses
 	public void loadUsers() {
+		// check if file is empty (nothing to load if empty)
+		File usersFile = new File("Users.txt");
+		if (usersFile.length() == 0){
+			return;
+		}
+
 		// read from the UserInfo.txt file
 		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("UserInfo.txt"))){
 			// remove any pre-existing users
@@ -33,6 +39,8 @@ public class UserDatabase {
 
 	// Login function to grab specific User Data
 	public User login(String username, String pw) {
+		// Strip username of leading and trailing whitespace
+		username = username.strip();
 		for (User user : accounts) {
 			byte[] salt = user.getSalt();
 			String encodedName = encode(username, salt);
@@ -49,6 +57,7 @@ public class UserDatabase {
 	// @pre password is valid
 	public boolean createAccount(String username, String password) {
 		// checking if the user alr exists in the accounts
+		username = username.strip();
 		for (User user : accounts) {
 			String encodedUsername = encode(username, user.getSalt());
 			if (encodedUsername.equals(user.getUserName())) {

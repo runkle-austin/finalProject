@@ -14,6 +14,19 @@ import static org.junit.Assert.*;
 public class UserDatabaseTest {
 
 	@Test
+	public void testStrippedUserName(){
+		UserDatabase db = new UserDatabase();
+		db.loadUsers();
+		// note the leading and trailing white space (also used good password)
+		db.createAccount(" Testing ", "Qq1234567890-");
+
+		User user = db.login("Testing", "Qq1234567890-");
+		// if login didn't work, user will be null
+		assertNotNull(user);
+	}
+
+
+	@Test
 	public void testPassword() {
 		ExerciseCatalog.loadExercises();
 		UserDatabase db = new UserDatabase();
