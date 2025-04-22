@@ -1,11 +1,16 @@
 // User.java
 package model;
 
+import observer.UserObservable;
+import observer.UserObserver;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 // This class stores all of the information about a user
-public class User implements Serializable {
+public class User implements UserObservable, Serializable {
 	// INSTANCE VARIABLES
 	private String userName;
 	private String password;
@@ -13,12 +18,30 @@ public class User implements Serializable {
 	// contains info about a users workout cycles and exercises
 	private FullLog myFullLog;
 	private static final long serialVersionUID = 1L;
+	private final List<UserObserver> observers = new ArrayList<>();;
 
 	// CONSTRUCTOR
 	public User(String name, String pw) {
 		this.userName = name;
 		this.password = pw;
 		this.myFullLog = new FullLog();
+	}
+
+	@Override
+	public void addObserver(UserObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void removeObserver(UserObserver o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (UserObserver o : observers) {
+			o.modelChanged();
+		}
 	}
 
 	// METHODS
@@ -36,24 +59,12 @@ public class User implements Serializable {
 		return this.userName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
 	public String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public FullLog getMyFullLog() {
 		return myFullLog;
-	}
-
-	public void setMyFullLog(FullLog myFullLog) {
-		this.myFullLog = myFullLog;
 	}
 
 	@Override

@@ -19,7 +19,9 @@ public class LoginController {
         User currUser = app.getUserDb().login(username, password);
         if (currUser != null) {
             // Successfully authenticated: show the home page.
-            app.showHomePage(stage, currUser);
+            app.setCurrentUser(currUser);
+            app.setCurrentUserName(username);
+            app.showHomePage(stage);
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("Login Failed");
@@ -34,8 +36,15 @@ public class LoginController {
             // if account created successfully
             if (app.getUserDb().createAccount(username, password)) {
                 User currUser = app.getUserDb().login(username, password);
+                app.setCurrentUser(currUser);
+                app.setCurrentUserName(username);
                 // Successfully authenticated: show the home page.
-                app.showHomePage(stage, currUser);
+                app.showHomePage(stage);
+            }
+            else{
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setHeaderText("Account Already Exists");
+                alert.showAndWait();
             }
         }
         else {

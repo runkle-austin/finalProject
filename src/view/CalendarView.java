@@ -9,33 +9,45 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.FullLog;
+import model.User;
 import model.Workout;
 import model.WorkoutCycle;
-import observer.WorkoutObserver;
+import observer.UserObserver;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.HashMap;
 
-public class DashBoardView implements WorkoutObserver {
+public class CalendarView implements UserObserver {
     private final GridPane calendar;
     private final YearMonth currentMonth;
-    private final FullLog model;
+    private GUIView app;
+    private final VBox view;
 
-    public DashBoardView(FullLog model) {
-        this.model = model;
-        this.model.addObserver(this);
+    public CalendarView(GUIView app, Stage stage) {
+        app.getCurrentUser().addObserver(this);
         calendar = new GridPane();
         calendar.setPadding(new Insets(20));
         calendar.setHgap(10);
         calendar.setVgap(10);
         currentMonth = YearMonth.now();
+
+        this.app = app;
+
+        // Back Button Setup
+        Button backBtn = new Button("Back to Home");
+        backBtn.setOnAction(e -> app.showHomePage(stage));
+
+        view = new VBox(10);
+        view.setPadding(new Insets(20));
+        view.getChildren().addAll(backBtn, calendar);
+
         populateCalendar();
     }
 
-    public GridPane getView() {
-        return calendar;
+    public VBox getView() {
+        return view;
     }
 
     private void populateCalendar() {
@@ -55,7 +67,8 @@ public class DashBoardView implements WorkoutObserver {
         int row = 1;
         int col = dayOfWeek - 1;
 
-        WorkoutCycle cycle = model.getActiveCycle();
+        User user = app.getCurrentUser();
+        WorkoutCycle cycle = user.getMyFullLog().getActiveCycle();
         HashMap<Integer, Workout> workoutsForMonth = new HashMap<>();
 
         if (cycle != null) {

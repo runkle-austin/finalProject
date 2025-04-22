@@ -1,20 +1,17 @@
 package model;
 
-import observer.WorkoutObservable;
-import observer.WorkoutObserver;
-import org.json.JSONObject;
+import observer.UserObserver;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FullLog implements WorkoutObservable, Serializable {
+public class FullLog implements Serializable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
     private WorkoutCycle activeCycle;
     private ArrayList<Exercise> myExercises;    // this is only exercises that aren't in the catalog
     private ArrayList<Workout> myWorkouts;
-    private final List<WorkoutObserver> observers = new ArrayList<>();;
 
     public FullLog() {
         this.myWorkoutCycles = new ArrayList<>();
@@ -73,7 +70,6 @@ public class FullLog implements WorkoutObservable, Serializable {
     public boolean addWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.size() < 8) {
             myWorkoutCycles.add(workoutCycle);
-            notifyObservers();
             return true;
         }
         return false;
@@ -82,7 +78,6 @@ public class FullLog implements WorkoutObservable, Serializable {
     public boolean removeWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.contains(workoutCycle)) {
             myWorkoutCycles.remove(workoutCycle);
-            notifyObservers();
             return true;
         }
         return false;
@@ -90,28 +85,10 @@ public class FullLog implements WorkoutObservable, Serializable {
 
     public void setActiveCycle(WorkoutCycle wc) {
         this.activeCycle = wc;
-        notifyObservers();
     }
 
     public WorkoutCycle getActiveCycle() {
         return this.activeCycle;
-    }
-
-    @Override
-    public void addObserver(WorkoutObserver o) {
-        observers.add(o);
-    }
-
-    @Override
-    public void removeObserver(WorkoutObserver o) {
-        observers.remove(o);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (WorkoutObserver o : observers) {
-            o.modelChanged();
-        }
     }
 
     private void createDefaultWorkouts() {

@@ -16,5 +16,12 @@ public class HomeController {
         app.getUserDb().logout();
         app.showLogin(stage); // ✅ go back to login screen
     }
+
+    public void showMyWorkouts() {
+    }
+
+    public void showWorkoutCycles() {
+
+    }
 }
 

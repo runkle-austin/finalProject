@@ -1,5 +1,5 @@
 package observer;
 
-public interface WorkoutObserver {
+public interface UserObserver {
     void modelChanged();
 }
