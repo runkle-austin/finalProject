@@ -36,24 +36,12 @@ public class User implements Serializable {
 		return this.userName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
 	public String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public FullLog getMyFullLog() {
 		return myFullLog;
-	}
-
-	public void setMyFullLog(FullLog myFullLog) {
-		this.myFullLog = myFullLog;
 	}
 
 	@Override
