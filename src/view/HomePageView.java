@@ -3,11 +3,14 @@ package view;
 import controller.HomeController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.FullLog;
 import model.User;
+
+import java.time.LocalDate;
 
 public class HomePageView {
     private BorderPane root;
@@ -34,12 +37,33 @@ public class HomePageView {
         Button calendarBtn = new Button("View Calendar");
         calendarBtn.setOnAction(e -> app.showCalendarView(stage)); // Assuming this method exists
 
+        TextField weightField = new TextField();
+        weightField.setPromptText("Enter your weight (lbs)");
+
+        Button submitButton = new Button("Save Weight");
+        Label confirmationLabel = new Label();
+
+        submitButton.setOnAction(e -> {
+            try {
+                double weight = Double.parseDouble(weightField.getText());
+                LocalDate date = LocalDate.now();  // or get from a DatePicker
+                app.getCurrentUser().getMyFullLog().getMyWeightLog().put(date, weight);
+                confirmationLabel.setText("Saved weight for " + date.toString() + ": " + weight + " kg");
+                weightField.clear();
+                app.showWeightGraphView(stage);
+            } catch (NumberFormatException ex) {
+                confirmationLabel.setText("Please enter a valid number.");
+            }
+        });
+
         content.getChildren().addAll(
                 welcomeLabel,
                 workoutCount,
                 workoutCyclesBtn,
                 myWorkoutsBtn,
                 calendarBtn,
+                weightField,
+                submitButton,
                 logoutBtn
         );
 

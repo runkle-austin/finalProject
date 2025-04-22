@@ -46,6 +46,14 @@ public class GUIView extends Application {
         stage.show();
     }
 
+    public void showWeightGraphView(Stage stage) {
+        WeightGraphView weightGraphView = new WeightGraphView(this, stage);
+        Scene scene = new Scene(weightGraphView.getView(), 800, 600);
+        stage.setTitle("Weight Graph");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
     public UserDatabase getUserDb() {

@@ -3,20 +3,21 @@ package model;
 import observer.UserObserver;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.util.*;
 
 public class FullLog implements Serializable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
     private WorkoutCycle activeCycle;
     private ArrayList<Exercise> myExercises;    // this is only exercises that aren't in the catalog
     private ArrayList<Workout> myWorkouts;
+    private Map<LocalDate, Double> myWeightLog = new TreeMap<>();
 
     public FullLog() {
         this.myWorkoutCycles = new ArrayList<>();
         this.myExercises = new ArrayList<>();
         this.myWorkouts = new ArrayList<>();
+        this.myWeightLog = new TreeMap<>();
         createDefaultWorkouts();
     }
 
@@ -89,6 +90,10 @@ public class FullLog implements Serializable {
 
     public WorkoutCycle getActiveCycle() {
         return this.activeCycle;
+    }
+
+    public Map<LocalDate, Double> getMyWeightLog() {
+        return myWeightLog;
     }
 
     private void createDefaultWorkouts() {
