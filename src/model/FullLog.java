@@ -97,6 +97,7 @@ public class FullLog implements Serializable {
     }
 
     private void createDefaultWorkouts() {
+        ExerciseCatalog.loadExercises();
         Workout push = new Workout("push");
         push.addLift("barbell bench press", 0, 0, 0);
         push.addLift("incline barbell press", 0, 0, 0);
