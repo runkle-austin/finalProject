@@ -3,8 +3,11 @@ package model;
 import observer.UserObserver;
 
 import java.io.Serializable;
+import java.security.Key;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.HashSet;
 
 public class FullLog implements Serializable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
@@ -31,6 +34,9 @@ public class FullLog implements Serializable {
     public ArrayList<Workout> getMyWorkouts(){
         ArrayList<Workout> workouts = new ArrayList<>();
         for(Workout curr: myWorkouts){
+            if(curr == null){
+                continue;
+            }
             workouts.add(curr.getCopy());
         }
         return workouts;
@@ -42,11 +48,11 @@ public class FullLog implements Serializable {
 
     // max of 8 workouts, returns true if successfully added, false otherwise
     public boolean addWorkout(Workout workout){
-        if (myWorkouts.size() < 8) {
-            myWorkouts.add(workout);
-            return true;
+        if (myWorkouts.contains(workout)) {
+            return false;
         }
-        return false;
+        myWorkouts.add(workout);
+        return true;
     }
 
     public ArrayList<Exercise> getMyExercises() {
@@ -71,6 +77,9 @@ public class FullLog implements Serializable {
     public boolean addWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.size() < 8) {
             myWorkoutCycles.add(workoutCycle);
+            for (DayOfWeek day : DayOfWeek.values()) {
+                addWorkout(workoutCycle.getWorkoutByDay(day));
+            }
             return true;
         }
         return false;
@@ -167,6 +176,12 @@ public class FullLog implements Serializable {
         addWorkoutCycle(threeDay);
         addWorkoutCycle(fourDay);
         addWorkoutCycle(fiveDay);
+
+        for (WorkoutCycle workoutCycle : myWorkoutCycles) {
+            for (DayOfWeek day : DayOfWeek.values()) {
+                addWorkout(workoutCycle.getWorkoutByDay(day));
+            }
+        }
     }
 
     @Override

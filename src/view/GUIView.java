@@ -79,6 +79,14 @@ public class GUIView extends Application {
         stage.show();
     }
 
+    public void showWorkoutDetailsView(Stage stage, Workout workout) {
+        WorkoutDetailsView workoutDetailsView = new WorkoutDetailsView(this, stage, workout);
+        Scene scene = new Scene(workoutDetailsView.getView(), 800, 600);
+        stage.setTitle("Workout Details");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
     public UserDatabase getUserDb() {

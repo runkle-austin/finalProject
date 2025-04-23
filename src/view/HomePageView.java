@@ -47,7 +47,7 @@ public class HomePageView {
                 double weight = Double.parseDouble(weightField.getText());
                 LocalDate date = LocalDate.now();  // or get from a DatePicker
                 app.getCurrentUser().getMyFullLog().getMyWeightLog().put(date, weight);
-                confirmationLabel.setText("Saved weight for " + date.toString() + ": " + weight + " kg");
+                confirmationLabel.setText("Saved weight for " + date.toString() + ": " + weight + " lbs");
                 weightField.clear();
                 app.showWeightGraphView(stage);
             } catch (NumberFormatException ex) {

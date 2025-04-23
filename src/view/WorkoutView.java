@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import model.User;
 import model.Workout;
 import model.WorkoutCycle;
-
 import java.util.ArrayList;
 
 public class WorkoutView {
@@ -24,7 +23,6 @@ public class WorkoutView {
         backBtn.setOnAction(e -> app.showHomePage(stage));
 
 
-
         // VBox to hold all workout cycles
         VBox cycleList = new VBox(10);
         cycleList.setPadding(new Insets(10));
@@ -37,7 +35,7 @@ public class WorkoutView {
             Button viewBtn = new Button("View");
 
             // hook up later: maybe open a detail view
-            //viewBtn.setOnAction(e -> app.showWorkoutDetailsView(stage, workout));
+            viewBtn.setOnAction(e -> app.showWorkoutDetailsView(stage, workout));
 
             row.getChildren().addAll(name, viewBtn);
             cycleList.getChildren().add(row);

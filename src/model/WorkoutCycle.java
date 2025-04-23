@@ -55,6 +55,10 @@ public final class WorkoutCycle implements Serializable {
 		oneWeek.put(day, w);
 	}
 
+	public Workout getWorkoutByDay(DayOfWeek day) {
+		return oneWeek.get(day);
+	}
+
 	// remove a single day of workouts and return true if completed
 	public boolean removeWorkoutByDay(String d) {
 		DayOfWeek day = DayOfWeek.valueOf(d.toUpperCase());
