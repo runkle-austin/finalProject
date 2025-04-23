@@ -36,7 +36,7 @@ public class WorkoutCyclesView {
             Button viewBtn = new Button("View");
 
             // hook up later: maybe open a detail view
-            viewBtn.setOnAction(e -> System.out.println("Viewing " + cycle.getName()));
+            viewBtn.setOnAction(e -> app.showWorkoutCycleDetailView(stage, cycle));
 
             row.getChildren().addAll(name, weeks, viewBtn);
             cycleList.getChildren().add(row);
