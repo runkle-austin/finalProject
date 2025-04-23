@@ -14,7 +14,7 @@ public class UserDatabase {
 	// this method fills the UserDatabase with the information from previous uses
 	public void loadUsers() {
 		// check if file is empty (nothing to load if empty)
-		File usersFile = new File("Users.txt");
+		File usersFile = new File("UserInfo.txt");
 		if (usersFile.length() == 0){
 			return;
 		}

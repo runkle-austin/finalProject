@@ -6,10 +6,10 @@ import javafx.scene.layout.VBox;
 import model.LiftData;
 import model.Workout;
 
-public class WorkoutDetailsView {
+public class CalendarWorkoutView {
     private final VBox layout;
 
-    public WorkoutDetailsView(Workout workout) {
+    public CalendarWorkoutView(Workout workout) {
         layout = new VBox(10);
         layout.setPadding(new Insets(15));
 

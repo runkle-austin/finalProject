@@ -21,7 +21,6 @@ public class HomePageView {
         content.setStyle("-fx-padding: 20;");
 
         Label welcomeLabel = new Label("Welcome To My Fitness App");
-        Label workoutCount = new Label("Total Workouts: " + app.getCurrentUser().getMyFullLog().getMyWorkouts().size());
 
         Button logoutBtn = new Button("Log Out");
         HomeController controller = new HomeController(app, stage);
@@ -32,7 +31,7 @@ public class HomePageView {
         workoutCyclesBtn.setOnAction(e -> app.showWorkoutCyclesView(stage));
 
         Button myWorkoutsBtn = new Button("My Workouts");
-        myWorkoutsBtn.setOnAction(e -> controller.showMyWorkouts());
+        myWorkoutsBtn.setOnAction(e -> app.showWorkoutView(stage));
 
         Button calendarBtn = new Button("View Calendar");
         calendarBtn.setOnAction(e -> app.showCalendarView(stage)); // Assuming this method exists
@@ -58,7 +57,6 @@ public class HomePageView {
 
         content.getChildren().addAll(
                 welcomeLabel,
-                workoutCount,
                 workoutCyclesBtn,
                 myWorkoutsBtn,
                 calendarBtn,

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.User;
 import model.UserDatabase;
+import model.Workout;
 import model.WorkoutCycle;
 
 public class GUIView extends Application {
@@ -47,7 +48,7 @@ public class GUIView extends Application {
     }
 
     public void showWeightGraphView(Stage stage) {
-        WorkoutCyclesView weightGraphView = new WorkoutCyclesView(this, stage);
+        WeightGraphView weightGraphView = new WeightGraphView(this, stage);
         Scene scene = new Scene(weightGraphView.getView(), 800, 600);
         stage.setTitle("Weight Graph");
         stage.setScene(scene);
@@ -66,6 +67,14 @@ public class GUIView extends Application {
         WorkoutCycleDetailView detailView = new WorkoutCycleDetailView(this, stage, cycle);
         Scene scene = new Scene(detailView.getView(), 800, 600);
         stage.setTitle("Cycle: " + cycle.getName());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void showWorkoutView(Stage stage) {
+        WorkoutView workoutView = new WorkoutView(this, stage);
+        Scene scene = new Scene(workoutView.getView(), 800, 600);
+        stage.setTitle("My Workouts");
         stage.setScene(scene);
         stage.show();
     }
