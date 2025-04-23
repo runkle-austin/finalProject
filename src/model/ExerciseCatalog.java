@@ -22,6 +22,7 @@ public final class ExerciseCatalog {
 		Scanner scanner;
 
 		try {
+			exercises.clear();
 			scanner = new Scanner(file);
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
