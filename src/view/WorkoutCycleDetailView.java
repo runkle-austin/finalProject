@@ -44,7 +44,9 @@ public class WorkoutCycleDetailView {
             view.getChildren().add(workoutName);
 
             // <p> Exercises
-            for (LiftData lift : workout.lifts()) {
+            for (LiftData lift : workout.getLifts())
+            {
+                System.out.println("Lift: " + lift.getName());
                 String text = String.format("%s — %d sets, %d reps, %.1f lbs",
                         lift.getName(), lift.getSets(), lift.getReps(), lift.getWeightInLbs());
                 Text liftText = new Text(text);
