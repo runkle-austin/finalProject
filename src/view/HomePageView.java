@@ -29,7 +29,7 @@ public class HomePageView {
 
         // New buttons
         Button workoutCyclesBtn = new Button("My Workout Cycles");
-        workoutCyclesBtn.setOnAction(e -> controller.showWorkoutCycles());
+        workoutCyclesBtn.setOnAction(e -> app.showWorkoutCyclesView(stage));
 
         Button myWorkoutsBtn = new Button("My Workouts");
         myWorkoutsBtn.setOnAction(e -> controller.showMyWorkouts());

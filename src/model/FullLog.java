@@ -145,18 +145,18 @@ public class FullLog implements Serializable {
         arms.addLift("preacher curls", 0, 0, 0);
         arms.addLift("seated curls", 0, 0, 0);
 
-        WorkoutCycle threeDay = new WorkoutCycle("threeDay", 4);
+        WorkoutCycle threeDay = new WorkoutCycle("Default: Three Day", 4);
         threeDay.addWorkout("monday", push);
         threeDay.addWorkout("wednesday", pull);
         threeDay.addWorkout("friday", legs);
 
-        WorkoutCycle fourDay = new WorkoutCycle("fourDay", 4);
+        WorkoutCycle fourDay = new WorkoutCycle("Default: Four Day", 4);
         fourDay.addWorkout("monday", chest);
         fourDay.addWorkout("tuesday", back);
         fourDay.addWorkout("wednesday", legs);
         fourDay.addWorkout("thursday", arms);
 
-        WorkoutCycle fiveDay = new WorkoutCycle("fiveDay", 4);
+        WorkoutCycle fiveDay = new WorkoutCycle("Default: Five Day", 4);
         fiveDay.addWorkout("monday", chest);
         fiveDay.addWorkout("tuesday", legs);
         fiveDay.addWorkout("wednesday", back);
