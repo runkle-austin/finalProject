@@ -1,7 +1,6 @@
 package view;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -10,8 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.User;
 import model.Workout;
-import model.WorkoutCycle;
-import java.util.ArrayList;
 
 public class WorkoutView {
     private final VBox view;
@@ -42,7 +39,7 @@ public class WorkoutView {
 
             Label workoutLabel = new Label("Workout: " + w.getName());
 
-            Button viewButton = new Button("View");
+            Button viewButton = new Button("Edit");
             viewButton.setOnAction(e -> app.showWorkoutDetailsView(stage, w));
 
             Button removeButton = new Button("Remove");

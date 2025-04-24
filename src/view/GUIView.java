@@ -77,8 +77,8 @@ public class GUIView extends Application {
     }
 
     public void showWorkoutDetailsView(Stage stage, Workout workout) {
-        WorkoutDetailsView workoutDetailsView = new WorkoutDetailsView(this, stage, workout);
-        Scene scene = new Scene(workoutDetailsView.getView(), 800, 600);
+        WorkoutEditView workoutEditView = new WorkoutEditView(this, stage, workout);
+        Scene scene = new Scene(workoutEditView.getView(), 800, 600);
         stage.setTitle("Workout Details");
         stage.setScene(scene);
         stage.show();
