@@ -1,13 +1,9 @@
 package model;
 
-import observer.UserObserver;
-
 import java.io.Serializable;
-import java.security.Key;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.HashSet;
 
 public class FullLog implements Serializable {
     private ArrayList<WorkoutCycle> myWorkoutCycles;
@@ -94,6 +90,15 @@ public class FullLog implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public boolean removeWorkout(Workout workout) {
+        boolean removed = false;
+        for(WorkoutCycle cycle: myWorkoutCycles){
+            removed = cycle.removeWorkoutFromOneWeek(workout);
+            myWorkouts.remove(workout);
+        }
+        return removed;
     }
 
     public void setActiveCycle(WorkoutCycle wc) {

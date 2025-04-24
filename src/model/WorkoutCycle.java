@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 public final class WorkoutCycle implements Serializable {
@@ -67,6 +68,12 @@ public final class WorkoutCycle implements Serializable {
 		}
 		oneWeek.remove(day);
 		return true;
+	}
+
+	public boolean removeWorkoutFromOneWeek(Workout w) {
+		boolean rem = false;
+        oneWeek.keySet().removeIf(day -> oneWeek.get(day).equals(w));
+		return rem;
 	}
 
 	// based on our input week of workouts, generates a full workout cycle of len numberOfWeeks

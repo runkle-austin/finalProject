@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.User;
@@ -39,12 +40,24 @@ public class WorkoutView {
         // populate *right now* from the log
         for (Workout w : user.getMyFullLog().getMyWorkouts()) {
             HBox row = new HBox(15);
-            row.getChildren().addAll(
-                    new Label("Workout: " + w.getName()),
-                    new Button("View") {{
-                        setOnAction(e -> app.showWorkoutDetailsView(stage, w));
-                    }}
-            );
+            row.setPadding(new Insets(5));
+
+            Label workoutLabel = new Label("Workout: " + w.getName());
+
+            Button viewButton = new Button("View");
+            viewButton.setOnAction(e -> app.showWorkoutDetailsView(stage, w));
+
+            Button removeButton = new Button("Remove");
+            removeButton.setOnAction(e -> {
+                boolean removed = user.getMyFullLog().removeWorkout(w);
+                System.out.println("Removed workout '" + w.getName() + "': " + removed);
+                cycleList.getChildren().remove(row);
+            });
+
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
+
+            row.getChildren().addAll(workoutLabel, spacer, viewButton, removeButton);
             cycleList.getChildren().add(row);
         }
 

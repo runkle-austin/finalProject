@@ -102,7 +102,12 @@ public class CalendarView implements UserObserver {
                 workoutLabel.setFont(Font.font(12));
                 workoutLabel.setWrapText(true);
 
-                dayButton.setOnAction(e -> openWorkoutDetails(todayWorkout));
+                int finalDay = day;
+                dayButton.setOnAction(e -> {
+                    System.out.println("Clicked: " + finalDay + " → " + todayWorkout.getName());
+                    openWorkoutDetails(todayWorkout);
+                });
+
                 dayBox.getChildren().addAll(dayButton, workoutLabel);
             } else {
                 dayBox.getChildren().add(dayButton);
