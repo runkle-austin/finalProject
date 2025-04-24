@@ -1,28 +1,29 @@
 package view;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Exercise;
+import model.ExerciseCatalog;
 import model.LiftData;
 import model.Workout;
 
 public class WorkoutEditView {
-    private final VBox root;  // this becomes the thing returned by getView()
+    private final VBox root;
 
     public WorkoutEditView(GUIView app, Stage stage, Workout workout) {
         VBox content = new VBox(15);
         content.setPadding(new Insets(20));
 
-        // Title of Workout
+        // Title
         Label title = new Label("Workout: " + workout.getName());
         title.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-underline: true;");
+        content.getChildren().add(title);
 
-        // Show each exercise and lift data
+        // Existing lifts
         for (LiftData liftData : workout.getLifts()) {
             String text = String.format("%s — %d sets, %d reps, %.1f lbs",
                     liftData.getName(), liftData.getSets(), liftData.getReps(), liftData.getWeightInLbs());
@@ -30,7 +31,7 @@ public class WorkoutEditView {
             Label liftLabel = new Label(text);
             Button removeButton = new Button("Remove");
 
-            HBox row = new HBox(15); // ← matches your style
+            HBox row = new HBox(15);
             row.setPadding(new Insets(5));
             row.getChildren().addAll(liftLabel, removeButton);
 
@@ -41,18 +42,89 @@ public class WorkoutEditView {
 
             content.getChildren().add(row);
         }
-        content.getChildren().add(new Text("\n"));
+
+
+        // Input controls
+        ComboBox<String> exerciseCombo = new ComboBox<>();
+        ExerciseCatalog.getAllExercises().stream()
+                .map(Exercise::getName)
+                .forEach(exerciseCombo.getItems()::add);
+        exerciseCombo.setPromptText("Select exercise");
+        exerciseCombo.setPrefWidth(150);
+
+        TextField setsField = new TextField(); setsField.setPromptText("Sets"); setsField.setPrefWidth(60);
+        TextField repsField = new TextField(); repsField.setPromptText("Reps"); repsField.setPrefWidth(60);
+        TextField weightField = new TextField(); weightField.setPromptText("Weight"); weightField.setPrefWidth(80);
+
+        Button addLiftBtn = new Button("Add Lift");
+        Label errorLabel = new Label();
+        errorLabel.setStyle("-fx-text-fill: red;");
+
+        // Input row (HBox)
+        HBox inputRow = new HBox(10);
+        inputRow.setPadding(new Insets(10));
+        inputRow.getChildren().addAll(exerciseCombo, setsField, repsField, weightField, addLiftBtn);
+
+        content.getChildren().addAll(inputRow, errorLabel);
+
+        // Add-lift button logic
+        addLiftBtn.setOnAction(e -> {
+            String exerciseName = exerciseCombo.getValue();
+            String setsText = setsField.getText();
+            String repsText = repsField.getText();
+            String weightText = weightField.getText();
+
+            if (exerciseName == null || setsText.isEmpty() || repsText.isEmpty() || weightText.isEmpty()) {
+                errorLabel.setText("Please fill out all fields.");
+                return;
+            }
+
+            try {
+                int sets = Integer.parseInt(setsText);
+                int reps = Integer.parseInt(repsText);
+                double weight = Double.parseDouble(weightText);
+
+                // Add to model
+                workout.addLift(exerciseName, reps, weight, sets);
+
+                // Add to UI
+                String display = String.format("%s — %d sets, %d reps, %.1f lbs", exerciseName, sets, reps, weight);
+                Label liftLabel = new Label(display);
+                Button removeBtn = new Button("Remove");
+
+                HBox liftRow = new HBox(15);
+                liftRow.setPadding(new Insets(5));
+                liftRow.getChildren().addAll(liftLabel, removeBtn);
+
+                removeBtn.setOnAction(ev -> {
+                    workout.removeLift(exerciseName);
+                    content.getChildren().remove(liftRow);
+                });
+
+                int insertIndex = content.getChildren().indexOf(inputRow);
+                content.getChildren().add(insertIndex, liftRow);
+
+                // Clear inputs
+                exerciseCombo.setValue(null);
+                setsField.clear();
+                repsField.clear();
+                weightField.clear();
+                errorLabel.setText("");
+
+            } catch (NumberFormatException ex) {
+                errorLabel.setText("Sets, reps, and weight must be numbers.");
+            }
+        });
 
         // Back button
         Button backBtn = new Button("Back");
         backBtn.setOnAction(e -> app.showWorkoutView(stage));
         content.getChildren().add(backBtn);
 
-        // Wrap in a scroll pane
+        // Scroll wrapper
         ScrollPane scrollPane = new ScrollPane(content);
         scrollPane.setFitToWidth(true);
 
-        // Final root VBox that holds the scroll pane
         root = new VBox(scrollPane);
     }
 
