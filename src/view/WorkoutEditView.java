@@ -7,17 +7,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Exercise;
 import model.LiftData;
 import model.Workout;
-import model.WorkoutCycle;
 
-import java.time.DayOfWeek;
-
-public class WorkoutDetailsView {
+public class WorkoutEditView {
     private final VBox root;  // this becomes the thing returned by getView()
 
-    public WorkoutDetailsView(GUIView app, Stage stage, Workout workout) {
+    public WorkoutEditView(GUIView app, Stage stage, Workout workout) {
         VBox content = new VBox(15);
         content.setPadding(new Insets(20));
 
