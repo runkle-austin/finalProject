@@ -4,10 +4,7 @@ package view;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.User;
-import model.UserDatabase;
-import model.Workout;
-import model.WorkoutCycle;
+import model.*;
 
 public class GUIView extends Application {
     private UserDatabase userDb = new UserDatabase();
@@ -87,7 +84,23 @@ public class GUIView extends Application {
         stage.show();
     }
 
+    // Helper Method to Show Add Workout Page
+    public void showAddWorkoutPage(Stage stage) {
+        AddWorkoutView addWorkoutView = new AddWorkoutView(this, stage);
+        Scene scene = new Scene(addWorkoutView.getView(), 800, 600);
+        stage.setTitle("Add Workout");
+        stage.setScene(scene);
+        stage.show();
+    }
 
+    // Helper Method to Show Edit Lifts View Page
+    public void showEditLiftsView(Stage stage, Workout workout) {
+        EditLiftsView editLiftsView = new EditLiftsView(this, stage, workout);
+        Scene scene = new Scene(editLiftsView.getView(), 800, 600);
+        stage.setTitle("Edit Lifts");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public UserDatabase getUserDb() {
         return userDb;

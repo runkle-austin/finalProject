@@ -21,8 +21,6 @@ public class WorkoutCyclesView {
         Button backBtn = new Button("Back to Home");
         backBtn.setOnAction(e -> app.showHomePage(stage));
 
-
-
         // VBox to hold all workout cycles
         VBox cycleList = new VBox(10);
         cycleList.setPadding(new Insets(10));

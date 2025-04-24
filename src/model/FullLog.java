@@ -22,6 +22,10 @@ public class FullLog implements Serializable {
         this.myWorkouts = new ArrayList<>();
         this.myWeightLog = new TreeMap<>();
         createDefaultWorkouts();
+        // Also loaded catalog so user can pick from exercises
+        // It was too complicated to add an exercise that we didn't have
+        // Sorry Ryan
+        ExerciseCatalog.loadExercises();
     }
 
     public FullLog(ArrayList<WorkoutCycle> myWorkoutCycles, ArrayList<Exercise> myExercises, ArrayList<Workout> myWorkouts) {
@@ -46,18 +50,17 @@ public class FullLog implements Serializable {
         myWorkouts = workouts;
     }
 
-    // max of 8 workouts, returns true if successfully added, false otherwise
-    public boolean addWorkout(Workout workout){
-        if (myWorkouts.contains(workout)) {
-            return false;
+    // Change: 4/23 Carlos: boolean to void return type (fix for GUI)
+    public void addWorkout(Workout workout){
+        if (!myWorkouts.contains(workout)) {
+            myWorkouts.add(workout);
         }
-        myWorkouts.add(workout);
-        return true;
     }
 
     public ArrayList<Exercise> getMyExercises() {
         return (ArrayList<Exercise>) myExercises.clone();
     }
+
 
     // creates a new exercise
     // @pre - only use if exercise was not found in exerciseCatalog

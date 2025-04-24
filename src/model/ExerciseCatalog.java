@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -14,7 +16,7 @@ public final class ExerciseCatalog {
 	/* INSTANCE VARIABLES
 	 * each exercise is guaranteed to be unique
 	 */
-	static ArrayList<Exercise> exercises = new ArrayList<>();
+	private static final ArrayList<Exercise> exercises = new ArrayList<>();
 
 	// CONSTRUCTOR
 	public static void loadExercises() {
@@ -31,6 +33,10 @@ public final class ExerciseCatalog {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static List<Exercise> getAllExercises() {
+		return Collections.unmodifiableList(exercises);
 	}
 
 	private static Exercise createExercise(String[] line) {
