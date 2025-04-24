@@ -27,16 +27,17 @@ public final class WorkoutCycle implements Serializable {
 		return this.name;
 	}
 
-
-
+	// set the cycle name
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	// get the number of weeks of the cycle
 	public int getNumberWeeks() {
 		return this.numberWeeks;
 	}
 
+	// set the number of weeks of the cycle
 	public void setNumberWeeks(int numberWeeks) {
 		this.numberWeeks = numberWeeks;
 	}
@@ -45,6 +46,7 @@ public final class WorkoutCycle implements Serializable {
 		return this.oneWeek;
 	}
 
+	// set the template week of the cycle
 	public void setOneWeek(HashMap<DayOfWeek, Workout> oneWeek) {
 		this.oneWeek = oneWeek;
 	}
@@ -56,6 +58,7 @@ public final class WorkoutCycle implements Serializable {
 		oneWeek.put(day, w);
 	}
 
+	// get the work out of a single day
 	public Workout getWorkoutByDay(DayOfWeek day) {
 		return oneWeek.get(day);
 	}
@@ -70,6 +73,7 @@ public final class WorkoutCycle implements Serializable {
 		return true;
 	}
 
+	// remove a work out from the cycle
 	public boolean removeWorkoutFromOneWeek(Workout w) {
 		boolean rem = false;
         oneWeek.keySet().removeIf(day -> oneWeek.get(day).equals(w));
@@ -127,6 +131,7 @@ public final class WorkoutCycle implements Serializable {
 		return thisWeek;
 	}
 
+	// get the full cycle as a string
 	public String getFullCycle() {
 		String str = "Full Cycle\n";
 		int index = 1;

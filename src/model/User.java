@@ -54,11 +54,12 @@ public class User implements UserObservable, Serializable {
 		this.salt = salt;
 	}
 	
+	// get the user name
 	public String getUserName() {
-		// TODO make decode function that gets the actual username
 		return this.userName;
 	}
 
+	// get the encoded password
 	public String getPassword() {
 		return this.password;
 	}

@@ -6,6 +6,7 @@ import model.Exercise;
 import java.io.Serializable;
 import java.util.Objects;
 
+// This class stores information about a lift
 public class LiftData implements Serializable {
 	// INSTANCE VARIABLES
 	private Exercise ex;
@@ -23,19 +24,21 @@ public class LiftData implements Serializable {
 	}
 
 	// GETTERS
-	
 	public String getName() {
 		return this.ex.getName();
 	}
 
+	// get the current exercise
 	public Exercise getExercise() {
 		return this.ex;
 	}
 	
+	// get the intensity
 	public Intensity getIntensity() {
 		return this.ex.getIntensity();
 	}
 	
+	// get the muscle group
 	public MuscleGroup getMuscleGroup() {
 		return this.ex.getMuscle();
 	}
@@ -44,14 +47,17 @@ public class LiftData implements Serializable {
 		return this.reps;
 	}
 	
+	// get the weight in pounds
 	public double getWeightInLbs() {
 		return this.weightInLbs;
 	}
 	
+	// convert the weight to kg
 	public double getWeightInKg() {
 		return this.weightInLbs / 2.20462;
 	}
 	
+	// get the sets 
 	public int getSets() {
 		return this.sets;
 	}

@@ -39,6 +39,7 @@ public final class ExerciseCatalog {
 		return Collections.unmodifiableList(exercises);
 	}
 
+	// creates the exercise from the given 
 	private static Exercise createExercise(String[] line) {
 		String name = line[0].strip();
 		String group = line[1].strip();
@@ -50,6 +51,7 @@ public final class ExerciseCatalog {
 	}
 
 
+	// set return the intensity enum of the exercise
 	public static Intensity intensityEnum(String intes) {
 		switch (intes.toUpperCase()) {
 			case "LOW":
@@ -61,6 +63,7 @@ public final class ExerciseCatalog {
 		}
 	}
 
+	// set the returns the enum muscle group
 	public static MuscleGroup muscleGroupEnum(String muscle) {
 		switch (muscle) {
 			case "Chest":
@@ -80,6 +83,7 @@ public final class ExerciseCatalog {
 		}
 	}
 
+	// get the exercise by name
 	public static Exercise getExerciseByName(String name) {
 		for (Exercise ex : exercises) {
 			if ((ex.getName().strip()).equalsIgnoreCase(name.strip())) {
