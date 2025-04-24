@@ -63,11 +63,7 @@ public class Workout implements Serializable {
 
 	// get deep-copied lifts in the workout
 	public ArrayList<LiftData> getLifts() {
-		ArrayList<LiftData> copy = new ArrayList<>();
-		for (LiftData l : lifts) {
-			copy.add(l.copy());
-		}
-		return copy;
+		return lifts;
 	}
 
 	public Workout getCopy(){
