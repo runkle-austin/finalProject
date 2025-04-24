@@ -93,7 +93,9 @@ public class GUIView extends Application {
         stage.show();
     }
 
-    /*public void showAddWorkoutCyclePage(Stage stage) {
+    /*
+    TODO help
+    public void showAddWorkoutCyclePage(Stage stage) {
         AddWorkoutCycleView addWorkoutCycleView = new AddWorkoutCycleView(this, stage);
         Scene scene = new Scene(addWorkoutCycleView.getView(), 800, 600);
         stage.setTitle("Add Workout Cycle");
@@ -104,8 +106,8 @@ public class GUIView extends Application {
 
     // Helper Method to Show Edit Lifts View Page
     public void showEditLiftsView(Stage stage, Workout workout) {
-        EditLiftsView editLiftsView = new EditLiftsView(this, stage, workout);
-        Scene scene = new Scene(editLiftsView.getView(), 800, 600);
+        LiftEditView liftEditView = new LiftEditView(this, stage, workout);
+        Scene scene = new Scene(liftEditView.getView(), 800, 600);
         stage.setTitle("Edit Lifts");
         stage.setScene(scene);
         stage.show();

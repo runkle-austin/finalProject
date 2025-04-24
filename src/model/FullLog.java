@@ -47,10 +47,12 @@ public class FullLog implements Serializable {
     }
 
     // Change: 4/23 Carlos: boolean to void return type (fix for GUI)
-    public void addWorkout(Workout workout){
+    public boolean addWorkout(Workout workout){
         if (!myWorkouts.contains(workout)) {
             myWorkouts.add(workout);
+            return true;
         }
+        return false;
     }
 
     public ArrayList<Exercise> getMyExercises() {

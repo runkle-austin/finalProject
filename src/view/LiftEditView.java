@@ -9,15 +9,13 @@ import model.Exercise;
 import model.ExerciseCatalog;
 import model.Workout;
 
-import java.util.Collections;
-
-public class EditLiftsView {
+public class LiftEditView {
     private final VBox view;
     private final GUIView app;
     private final Stage stage;
     private final Workout workout;
 
-    public EditLiftsView(GUIView app, Stage stage, Workout workout) {
+    public LiftEditView(GUIView app, Stage stage, Workout workout) {
         this.app     = app;
         this.stage   = stage;
         this.workout = workout;
@@ -80,11 +78,17 @@ public class EditLiftsView {
                 int reps   = Integer.parseInt(repsTxt);
                 double wt  = Double.parseDouble(wtTxt);
                 int sets   = Integer.parseInt(setsTxt);
+
+                if (sets <= 0 || reps <= 0 || wt < 0) {
+                    errorLabel.setText("Sets and reps must be positive integers: weight must be 0 or greater.");
+                    return;
+                }
+
                 boolean added = workout.addLift(exName, reps, wt, sets);
                 if (!added) errorLabel.setText("Could not add (duplicate or invalid exercise)");
                 refreshLiftList(liftsListView);
             } catch (NumberFormatException nfe) {
-                errorLabel.setText("Reps, weight, and sets must be numbers");
+                errorLabel.setText("Sets and reps must be positive integers: weight must be 0 or greater.");
             }
         });
 

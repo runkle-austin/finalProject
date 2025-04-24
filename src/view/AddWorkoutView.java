@@ -39,14 +39,14 @@ public class AddWorkoutView {
             if (workoutName.isEmpty()) {
                 errorLabel.setText("Please enter a workout name.");
             } else {
-                // 1) build the new Workout object
                 Workout newWorkout = new Workout(workoutName);
 
-                // 2) add to the user's log
-                user.getMyFullLog().addWorkout(newWorkout);
-
-                // 3) switch to the lift‐editing screen
-                app.showEditLiftsView(stage, newWorkout);
+                // Only continue if adding the workout was successful
+                if (user.getMyFullLog().addWorkout(newWorkout)) {
+                    app.showEditLiftsView(stage, newWorkout);
+                } else {
+                    errorLabel.setText("Workout name already exists. Choose a different name.");
+                }
             }
         });
 
@@ -59,6 +59,7 @@ public class AddWorkoutView {
         );
         view.setPadding(new Insets(20));
     }
+
 
     public Parent getView() {
         return view;

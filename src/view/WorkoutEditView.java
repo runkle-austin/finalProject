@@ -84,6 +84,11 @@ public class WorkoutEditView {
                 int reps = Integer.parseInt(repsText);
                 double weight = Double.parseDouble(weightText);
 
+                if (sets <= 0 || reps <= 0 || weight < 0) {
+                    errorLabel.setText("Sets and reps must be positive integers: weight must be 0 or greater.");
+                    return;
+                }
+
                 // Add to model
                 workout.addLift(exerciseName, reps, weight, sets);
 
@@ -112,7 +117,7 @@ public class WorkoutEditView {
                 errorLabel.setText("");
 
             } catch (NumberFormatException ex) {
-                errorLabel.setText("Sets, reps, and weight must be numbers.");
+                errorLabel.setText("Sets and reps must be positive integers: weight must be 0 or greater.");
             }
         });
 
