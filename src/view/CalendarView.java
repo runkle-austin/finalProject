@@ -69,6 +69,7 @@ public class CalendarView implements UserObserver {
 
         User user = app.getCurrentUser();
         WorkoutCycle cycle = user.getMyFullLog().getActiveCycle();
+        cycle.createFullCycle();
         HashMap<Integer, Workout> workoutsForMonth = new HashMap<>();
 
         if (cycle != null) {

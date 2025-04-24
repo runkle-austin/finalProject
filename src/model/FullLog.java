@@ -104,7 +104,7 @@ public class FullLog implements Serializable {
     }
 
     public WorkoutCycle getActiveCycle() {
-        return this.activeCycle;
+        return activeCycle;
     }
 
     public Map<LocalDate, Double> getMyWeightLog() {
@@ -188,6 +188,7 @@ public class FullLog implements Serializable {
                 addWorkout(workoutCycle.getWorkoutByDay(day));
             }
         }
+        setActiveCycle(threeDay);
     }
 
     @Override

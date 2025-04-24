@@ -31,12 +31,19 @@ public class WorkoutCyclesView {
             HBox row = new HBox(15);
             Label name = new Label("Cycle: " + cycle.getName());
             Label weeks = new Label("Weeks: " + cycle.getNumberWeeks());
-            Button viewBtn = new Button("View");
 
-            // hook up later: maybe open a detail view
+            // View the Workout Cycle
+            Button viewBtn = new Button("View");
             viewBtn.setOnAction(e -> app.showWorkoutCycleDetailView(stage, cycle));
 
-            row.getChildren().addAll(name, weeks, viewBtn);
+            // Set a Workout Cycle as Active Cycle
+            Button setCycleBtn = new Button("Set Workout Cycle");
+            setCycleBtn.setOnAction(e -> {
+                user.getMyFullLog().setActiveCycle(cycle);
+                user.notifyObservers();
+                app.showCalendarView(stage);});
+
+            row.getChildren().addAll(name, weeks, viewBtn,  setCycleBtn);
             cycleList.getChildren().add(row);
         }
 
