@@ -70,10 +70,8 @@ public final class WorkoutCycle implements Serializable {
 		return true;
 	}
 
-	public boolean removeWorkoutFromOneWeek(Workout w) {
-		boolean rem = false;
+	public void removeWorkoutFromOneWeek(Workout w) {
         oneWeek.keySet().removeIf(day -> oneWeek.get(day).equals(w));
-		return rem;
 	}
 
 	// based on our input week of workouts, generates a full workout cycle of len numberOfWeeks

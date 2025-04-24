@@ -92,13 +92,11 @@ public class FullLog implements Serializable {
         return false;
     }
 
-    public boolean removeWorkout(Workout workout) {
-        boolean removed = false;
+    public void removeWorkout(Workout workout) {
         for(WorkoutCycle cycle: myWorkoutCycles){
-            removed = cycle.removeWorkoutFromOneWeek(workout);
+            cycle.removeWorkoutFromOneWeek(workout);
             myWorkouts.remove(workout);
         }
-        return removed;
     }
 
     public void setActiveCycle(WorkoutCycle wc) {

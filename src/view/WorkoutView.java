@@ -47,8 +47,7 @@ public class WorkoutView {
 
             Button removeButton = new Button("Remove");
             removeButton.setOnAction(e -> {
-                boolean removed = user.getMyFullLog().removeWorkout(w);
-                System.out.println("Removed workout '" + w.getName() + "': " + removed);
+                user.getMyFullLog().removeWorkout(w);
                 cycleList.getChildren().remove(row);
             });
 
