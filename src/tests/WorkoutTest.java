@@ -125,7 +125,7 @@ public class WorkoutTest {
 		Workout w = new Workout("Test");
 		w.addLift("Pec Deck", 1, 2, 3);
 		w.addLift("Cable Rear Delt Fly", 10, 11, 12);
-		// assertEquals(w.toString(), "Workout Test\nCable Rear Delt Fly\nPec Deck\n");
+		assertEquals(w.toString(), "Workout Test\nPec Deck, reps = 1, weight = 2.0, sets = 3\nCable Rear Delt Fly, reps = 10, weight = 11.0, sets = 12\n");
 
 		Workout c = w.copy();
 		assertEquals(w.toString(), c.toString());

@@ -24,8 +24,6 @@ public class WorkoutView {
         this.stage = stage;
         this.user  = app.getCurrentUser();
 
-        // Debug Statement to see if Workouts are Added Properly (Will Delete Later)
-        System.out.println(">> WorkoutView: My Workouts Size = " + user.getMyFullLog().getMyWorkouts().size());
         // Back to Home
         Button backBtn = new Button("Back to Home");
         backBtn.setOnAction(e -> app.showHomePage(stage));
