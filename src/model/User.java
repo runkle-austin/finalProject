@@ -12,8 +12,8 @@ import java.util.Objects;
 // This class stores all of the information about a user
 public class User implements UserObservable, Serializable {
 	// INSTANCE VARIABLES
-	private String userName;
-	private String password;
+	private final String userName;
+	private final String password;
 	private byte[] salt;
 	// contains info about a users workout cycles and exercises
 	private FullLog myFullLog;
@@ -77,5 +77,9 @@ public class User implements UserObservable, Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(userName, password, myFullLog);
+	}
+
+	public void clearObservers() {
+		observers.clear();
 	}
 }

@@ -5,10 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.FullLog;
 import model.User;
 import model.Workout;
 import model.WorkoutCycle;
@@ -24,6 +26,7 @@ public class CalendarView implements UserObserver {
     private final YearMonth currentMonth;
     private GUIView app;
     private final VBox view;
+    private boolean showInLbs = true; // Toggle LBS vs KG
 
     public CalendarView(GUIView app, Stage stage) {
         app.getCurrentUser().addObserver(this);
@@ -39,9 +42,26 @@ public class CalendarView implements UserObserver {
         Button backBtn = new Button("Back to Home");
         backBtn.setOnAction(e -> app.showHomePage(stage));
 
+        // Toggle Button Setup
+        Button toggleUnitBtn = new Button("Show weight in KG");
+        toggleUnitBtn.setOnAction(e -> {
+            showInLbs = !showInLbs;
+            toggleUnitBtn.setText(showInLbs ? "Show weight in KG" : "Show weight in LBS");
+            populateCalendar();
+        });
+
+        // Top bar with back and toggle buttons
+        HBox topBar = new HBox();
+        topBar.setPadding(new Insets(0, 0, 10, 0));
+        topBar.setSpacing(10);
+        topBar.setStyle("-fx-alignment: top-right;");
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        topBar.getChildren().addAll(backBtn, spacer, toggleUnitBtn);
+
         view = new VBox(10);
         view.setPadding(new Insets(20));
-        view.getChildren().addAll(backBtn, calendar);
+        view.getChildren().addAll(topBar, calendar);
 
         populateCalendar();
     }
@@ -103,9 +123,7 @@ public class CalendarView implements UserObserver {
                 workoutLabel.setFont(Font.font(12));
                 workoutLabel.setWrapText(true);
 
-                int finalDay = day;
                 dayButton.setOnAction(e -> {
-                    System.out.println("Clicked: " + finalDay + " → " + todayWorkout.getName());
                     openWorkoutDetails(todayWorkout);
                 });
 
@@ -125,7 +143,7 @@ public class CalendarView implements UserObserver {
 
     private void openWorkoutDetails(Workout workout) {
         Stage detailsStage = new Stage();
-        CalendarWorkoutView view = new CalendarWorkoutView(workout);
+        CalendarWorkoutView view = new CalendarWorkoutView(workout, showInLbs);
         Scene scene = new Scene(view.getView(), 400, 300);
         detailsStage.setTitle("Workout Details");
         detailsStage.setScene(scene);

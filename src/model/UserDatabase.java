@@ -89,6 +89,7 @@ public class UserDatabase {
 			output.writeInt(accounts.size());
 			// add all of the users to the file
 			for (User u: accounts) {
+				u.clearObservers();
 				output.writeObject(u);
 			}
 		} catch (IOException e) {

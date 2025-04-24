@@ -23,6 +23,12 @@ public class LiftData implements Serializable {
 	}
 
 	// GETTERS
+	public double getWeight(boolean showInLbs) {
+		if (showInLbs) {
+			return weightInLbs;
+		}
+		return getWeightInKg();
+	}
 	
 	public String getName() {
 		return this.ex.getName();
@@ -99,5 +105,5 @@ public class LiftData implements Serializable {
 	public LiftData copy() {
 		return new LiftData(ex, reps, weightInLbs, sets);
 	}
-	
+
 }
