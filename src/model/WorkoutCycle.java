@@ -74,6 +74,16 @@ public final class WorkoutCycle implements Serializable {
         oneWeek.keySet().removeIf(day -> oneWeek.get(day).equals(w));
 	}
 
+	// Helper Method to Ad Workout By Day Object not String
+	public void setWorkoutByDay(DayOfWeek day, Workout w) {
+		oneWeek.put(day, w);
+	}
+
+	// Helper Method for GUI to Remove Workout By Day
+	public void removeWorkout(DayOfWeek day) {
+		oneWeek.remove(day);
+	}
+
 	// based on our input week of workouts, generates a full workout cycle of len numberOfWeeks
 	public void createFullCycle() {
 		fullCycle = new ArrayList<>(numberWeeks);

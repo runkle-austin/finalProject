@@ -114,52 +114,52 @@ public class FullLog implements Serializable {
     private void createDefaultWorkouts() {
         ExerciseCatalog.loadExercises();
         Workout push = new Workout("push");
-        push.addLift("barbell bench press", 0, 0, 0);
-        push.addLift("incline barbell press", 0, 0, 0);
-        push.addLift("pec deck", 0, 0, 0);
-        push.addLift("dumbbell side raises", 0, 0, 0);
-        push.addLift("cable tricep pushdown", 0, 0, 0);
-        push.addLift("skullcrushers", 0, 0, 0);
+        push.addLift("barbell bench press", 8, 135, 3);
+        push.addLift("incline barbell press", 6, 135, 3);
+        push.addLift("pec deck", 12, 100, 3);
+        push.addLift("dumbbell side raises", 12, 25, 3);
+        push.addLift("cable tricep pushdown", 12, 40, 3);
+        push.addLift("skullcrushers", 10, 25, 3);
 
         Workout pull = new Workout("pull");
-        pull.addLift("pronated lat pulldown", 0, 0, 0);
-        pull.addLift("supinated lat pulldown", 0, 0, 0);
-        pull.addLift("machine high row", 0, 0, 0);
-        pull.addLift("cable row", 0, 0, 0);
-        pull.addLift("cable rear delt fly", 0, 0, 0);
-        pull.addLift("cable face pull", 0, 0, 0);
-        pull.addLift("preacher curls", 0, 0, 0);
+        pull.addLift("pronated lat pulldown", 10, 120, 3);
+        pull.addLift("supinated lat pulldown", 10, 100, 3);
+        pull.addLift("machine high row", 8, 225, 3);
+        pull.addLift("cable row", 10, 25, 3);
+        pull.addLift("cable rear delt fly", 12, 40, 3);
+        pull.addLift("cable face pull", 15, 80, 3);
+        pull.addLift("preacher curls", 12, 25, 3);
 
         Workout legs = new Workout("legs");
-        legs.addLift("squats", 0, 0, 0);
-        legs.addLift("deadlift", 0, 0, 0);
-        legs.addLift("leg extension", 0, 0, 0);
-        legs.addLift("leg press", 0, 0, 0);
-        legs.addLift("hamstring curl", 0, 0, 0);
-        legs.addLift("calf raise", 0, 0, 0);
+        legs.addLift("squats", 6, 225, 3);
+        legs.addLift("deadlift", 4, 315, 3);
+        legs.addLift("leg extension", 8, 100, 3);
+        legs.addLift("leg press", 10, 225, 3);
+        legs.addLift("hamstring curl", 10, 45, 3);
+        legs.addLift("calf raise", 25, 135, 3);
 
         Workout chest = new Workout("chest");
-        chest.addLift("dumbbell bench press", 0, 0, 0);
-        chest.addLift("incline barbell press", 0, 0, 0);
-        chest.addLift("pec deck", 0, 0, 0);
-        chest.addLift("push ups", 0, 0, 0);
-        chest.addLift("crunch", 0, 0, 0);
+        chest.addLift("dumbbell bench press", 10, 60, 3);
+        chest.addLift("incline barbell press", 6, 135, 3);
+        chest.addLift("pec deck", 8, 150, 3);
+        chest.addLift("push ups", 15, 150, 3);
+        chest.addLift("crunch", 15, 150, 3);
 
         Workout back = new Workout("back");
-        back.addLift("pronated lat pulldown", 0, 0, 0);
-        back.addLift("supinated lat pulldown", 0, 0, 0);
-        back.addLift("machine high row", 0, 0, 0);
-        back.addLift("cable row", 0, 0, 0);
-        back.addLift("pull ups", 0, 0, 0);
-        back.addLift("crunch", 0, 0, 0);
+        back.addLift("pronated lat pulldown", 10, 130, 3);
+        back.addLift("supinated lat pulldown", 10, 130, 3);
+        back.addLift("machine high row", 10, 225, 3);
+        back.addLift("cable row", 10, 140, 3);
+        back.addLift("pull ups", 15, 150, 3);
+        back.addLift("crunch", 15, 150, 3);
 
         Workout arms = new Workout("arms");
-        arms.addLift("dumbbell shoulder press", 0, 0, 0);
-        arms.addLift("dumbbell side raises", 0, 0, 0);
-        arms.addLift("cable tricep pushdown", 0, 0, 0);
-        arms.addLift("skullcrushers", 0, 0, 0);
-        arms.addLift("preacher curls", 0, 0, 0);
-        arms.addLift("seated curls", 0, 0, 0);
+        arms.addLift("dumbbell shoulder press", 12, 60, 3);
+        arms.addLift("dumbbell side raises", 10, 25, 3);
+        arms.addLift("cable tricep pushdown", 15, 40, 3);
+        arms.addLift("skullcrushers", 10, 50, 3);
+        arms.addLift("preacher curls", 10, 30, 3);
+        arms.addLift("seated curls", 10, 30, 3);
 
         WorkoutCycle threeDay = new WorkoutCycle("Default: Three Day", 4);
         threeDay.addWorkout("monday", push);

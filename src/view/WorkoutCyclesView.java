@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -21,6 +22,12 @@ public class WorkoutCyclesView {
         Button backBtn = new Button("Back to Home");
         backBtn.setOnAction(e -> app.showHomePage(stage));
 
+        // Button to Add Workout Cycles
+        /*Button addCycleButton = new Button("Add Workout Cycle");
+        addCycleButton.setOnAction(e -> app.showAddWorkoutCyclePage(stage));
+         */
+
+
         // VBox to hold all workout cycles
         VBox cycleList = new VBox(10);
         cycleList.setPadding(new Insets(10));
@@ -32,9 +39,9 @@ public class WorkoutCyclesView {
             Label name = new Label("Cycle: " + cycle.getName());
             Label weeks = new Label("Weeks: " + cycle.getNumberWeeks());
 
-            // View the Workout Cycle
-            Button viewBtn = new Button("View");
-            viewBtn.setOnAction(e -> app.showWorkoutCycleDetailView(stage, cycle));
+            // Edit the Workout Cycle
+            Button viewBtn = new Button("Edit");
+            viewBtn.setOnAction(e -> app.showWorkoutCycleEditView(stage, cycle));
 
             // Set a Workout Cycle as Active Cycle
             Button setCycleBtn = new Button("Set Workout Cycle");
@@ -43,7 +50,24 @@ public class WorkoutCyclesView {
                 user.notifyObservers();
                 app.showCalendarView(stage);});
 
-            row.getChildren().addAll(name, weeks, viewBtn,  setCycleBtn);
+            // Button that Removes Workout Cycle
+            Button removeCycleBtn = new Button("Remove Workout Cycle");
+            removeCycleBtn.setOnAction(e -> {
+                WorkoutCycle active = user.getMyFullLog().getActiveCycle();
+
+                if (cycle.equals(active)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Cannot Remove Active Cycle");
+                    alert.setHeaderText(null);
+                    alert.setContentText("You cannot remove the currently active workout cycle. Please Set a New Cycle.");
+                    alert.showAndWait();
+                } else {
+                    user.getMyFullLog().removeWorkoutCycle(cycle);
+                    cycleList.getChildren().remove(row);
+                }
+            });
+
+            row.getChildren().addAll(name, weeks, viewBtn,  setCycleBtn, removeCycleBtn);
             cycleList.getChildren().add(row);
         }
 

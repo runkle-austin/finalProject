@@ -60,8 +60,8 @@ public class GUIView extends Application {
         stage.show();
     }
 
-    public void showWorkoutCycleDetailView(Stage stage, WorkoutCycle cycle) {
-        WorkoutCycleDetailView detailView = new WorkoutCycleDetailView(this, stage, cycle);
+    public void showWorkoutCycleEditView(Stage stage, WorkoutCycle cycle) {
+        WorkoutCycleEditView detailView = new WorkoutCycleEditView(this, stage, cycle);
         Scene scene = new Scene(detailView.getView(), 800, 600);
         stage.setTitle("Cycle: " + cycle.getName());
         stage.setScene(scene);
@@ -92,6 +92,15 @@ public class GUIView extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    /*public void showAddWorkoutCyclePage(Stage stage) {
+        AddWorkoutCycleView addWorkoutCycleView = new AddWorkoutCycleView(this, stage);
+        Scene scene = new Scene(addWorkoutCycleView.getView(), 800, 600);
+        stage.setTitle("Add Workout Cycle");
+        stage.setScene(scene);
+        stage.show();
+    }
+     */
 
     // Helper Method to Show Edit Lifts View Page
     public void showEditLiftsView(Stage stage, Workout workout) {
