@@ -18,9 +18,6 @@ public class FullLog implements Serializable {
         this.myWorkouts = new ArrayList<>();
         this.myWeightLog = new TreeMap<>();
         createDefaultWorkouts();
-        // Also loaded catalog so user can pick from exercises
-        // It was too complicated to add an exercise that we didn't have
-        // Sorry Ryan
         ExerciseCatalog.loadExercises();
     }
 
@@ -84,7 +81,6 @@ public class FullLog implements Serializable {
         myExercises.add(newExercise);
     }
 
-    // TODO escaping ref
     public ArrayList<WorkoutCycle> getMyWorkoutCycles() {
 
         return myWorkoutCycles;
@@ -109,7 +105,6 @@ public class FullLog implements Serializable {
         return false;
     }
 
-    //TODO TEST
     public void removeWorkout(Workout workout) {
         for(WorkoutCycle cycle: myWorkoutCycles){
             cycle.removeWorkoutFromOneWeek(workout);
@@ -121,12 +116,10 @@ public class FullLog implements Serializable {
         this.activeCycle = wc;
     }
 
-    //TODO TEST
     public WorkoutCycle getActiveCycle() {
         return activeCycle;
     }
 
-    //TODO TEST
     public Map<LocalDate, Double> getMyWeightLog() {
         return myWeightLog;
     }

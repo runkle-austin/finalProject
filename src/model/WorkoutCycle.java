@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
 
 public final class WorkoutCycle implements Serializable {
@@ -28,27 +27,16 @@ public final class WorkoutCycle implements Serializable {
 	}
 
 
-
-	//TODO TEST these or delete
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public int getNumberWeeks() {
 		return this.numberWeeks;
 	}
 
-	public void setNumberWeeks(int numberWeeks) {
-		this.numberWeeks = numberWeeks;
-	}
-
 	public HashMap<DayOfWeek, Workout> getOneWeek() {
 		return this.oneWeek;
-	}
-
-	public void setOneWeek(HashMap<DayOfWeek, Workout> oneWeek) {
-		this.oneWeek = oneWeek;
 	}
 
 	// adds a single day of workouts to our week
@@ -72,18 +60,16 @@ public final class WorkoutCycle implements Serializable {
 		return true;
 	}
 
-	//TODO TEST
 	public void removeWorkoutFromOneWeek(Workout w) {
         oneWeek.keySet().removeIf(day -> oneWeek.get(day).equals(w));
 	}
 
-	//TODO TEST
+
 	// Helper Method to Ad Workout By Day Object not String
 	public void setWorkoutByDay(DayOfWeek day, Workout w) {
 		oneWeek.put(day, w);
 	}
 
-	//TODO TEST
 	// Helper Method for GUI to Remove Workout By Day
 	public void removeWorkout(DayOfWeek day) {
 		oneWeek.remove(day);
@@ -167,7 +153,6 @@ public final class WorkoutCycle implements Serializable {
 		return str;
 	}
 
-	//TODO TEST
 	public ArrayList<HashMap<DayOfWeek, Workout>> getFullCycleData() {
 		return this.fullCycle;
 	}

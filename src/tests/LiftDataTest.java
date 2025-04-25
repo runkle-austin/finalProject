@@ -13,6 +13,16 @@ import model.LiftData;
 public class LiftDataTest {
 
 	@Test
+	public void testEquals() {
+		Exercise e = new Exercise("Pull up", MuscleGroup.BACK, Intensity.MEDIUM);
+		LiftData l1 = new LiftData(e, 10, 1, 3);
+		LiftData l2 = new LiftData(e, 10, 1, 3);
+		assertNotEquals(l1, null);
+		assertNotEquals(l1, e);
+		assertEquals(l1, l2);
+	}
+
+	@Test
 	public void testGetters() {
 		Exercise e = new Exercise("Pull up", MuscleGroup.BACK, Intensity.MEDIUM);
 		LiftData l = new LiftData(e, 10, 1, 3);
@@ -22,6 +32,9 @@ public class LiftDataTest {
 
 		assertEquals(Double.compare(l.getWeightInKg(), 1/2.20462), 0);
 
+		// test get weight
+		assertEquals(Double.compare(l.getWeight(true), l.getWeightInLbs()),0);
+		assertEquals(Double.compare(l.getWeight(false), l.getWeightInKg()),0);
 	}
 
 	@Test

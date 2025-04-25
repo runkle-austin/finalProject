@@ -13,6 +13,35 @@ import java.util.ArrayList;
 public class FullLogTest {
 
     @Test
+    public void testContainsCycleName(){
+        FullLog fullLog = new FullLog();
+        // cycle isn't in ful log so returns false
+        assertFalse(fullLog.containCycleName("Cycle"));
+        // add cycle and retest, should now return true
+        fullLog.addWorkoutCycle(new WorkoutCycle("Cycle", 1));
+        assertTrue(fullLog.containCycleName("Cycle"));
+    }
+
+    @Test
+    public void testCheckDupWorkoutName(){
+        FullLog fullLog = new FullLog();
+        // test isn't in ful log so returns false
+        assertFalse(fullLog.checkDupWorkoutName("test"));
+        // add cycle and retest, should now return true
+        fullLog.addWorkout(new Workout("test"));
+        assertTrue(fullLog.checkDupWorkoutName("test"));
+    }
+
+    @Test
+    public void testGetActiveCycle(){
+        FullLog fullLog = new FullLog();
+        WorkoutCycle workoutCycle = new WorkoutCycle("Cycle", 1);
+        fullLog.addWorkoutCycle(workoutCycle);
+        fullLog.setActiveCycle(workoutCycle);
+        assertEquals(workoutCycle, fullLog.getActiveCycle());
+    }
+
+    @Test
     public void testEmptyConstructor() {
         FullLog fullLog = new FullLog();
         assertNotNull(fullLog);
