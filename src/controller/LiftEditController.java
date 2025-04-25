@@ -2,7 +2,8 @@ package controller;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Exercise;
 import model.ExerciseCatalog;

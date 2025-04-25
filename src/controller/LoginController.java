@@ -3,7 +3,6 @@ package controller;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.User;
-import model.UserDatabase;
 import view.GUIView;
 import view.LoginView;
 
