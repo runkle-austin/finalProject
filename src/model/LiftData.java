@@ -4,6 +4,7 @@ package model;
 import java.io.Serializable;
 import java.util.Objects;
 
+// stores information about a lift
 public class LiftData implements Serializable {
 	// INSTANCE VARIABLES
 	private Exercise ex;
@@ -35,7 +36,8 @@ public class LiftData implements Serializable {
 	public Exercise getExercise() {
 		return this.ex;
 	}
-	
+
+	// get the intensity of the workout
 	public Intensity getIntensity() {
 		return this.ex.getIntensity();
 	}
@@ -51,7 +53,8 @@ public class LiftData implements Serializable {
 	public double getWeightInLbs() {
 		return this.weightInLbs;
 	}
-	
+
+	// convert the weight from lbs to kg
 	public double getWeightInKg() {
 		return this.weightInLbs / 2.20462;
 	}

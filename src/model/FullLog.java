@@ -5,13 +5,16 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
 
+// this class manages the users workout information
 public class FullLog implements Serializable {
+    //INSTANCE VARIABLES
     private ArrayList<WorkoutCycle> myWorkoutCycles;
     private WorkoutCycle activeCycle;
     private ArrayList<Exercise> myExercises;    // this is only exercises that aren't in the catalog
     private ArrayList<Workout> myWorkouts;
     private Map<LocalDate, Double> myWeightLog = new TreeMap<>();
 
+    // CONSTRUCTOR
     public FullLog() {
         this.myWorkoutCycles = new ArrayList<>();
         this.myExercises = new ArrayList<>();
@@ -21,6 +24,7 @@ public class FullLog implements Serializable {
         ExerciseCatalog.loadExercises();
     }
 
+    // create a new full log
     public FullLog(ArrayList<WorkoutCycle> myWorkoutCycles, ArrayList<Exercise> myExercises, ArrayList<Workout> myWorkouts) {
         this.myWorkoutCycles = myWorkoutCycles;
         this.myExercises = myExercises;
@@ -86,6 +90,7 @@ public class FullLog implements Serializable {
         return myWorkoutCycles;
     }
 
+    // adds a workout toi the array workouts and return true if it is successfully added
     public boolean addWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.size() < 8) {
             myWorkoutCycles.add(workoutCycle);
@@ -97,6 +102,7 @@ public class FullLog implements Serializable {
         return false;
     }
 
+    // removes a workout cycle from the list and returns true if it was in the list
     public boolean removeWorkoutCycle(WorkoutCycle workoutCycle) {
         if (myWorkoutCycles.contains(workoutCycle)) {
             myWorkoutCycles.remove(workoutCycle);
@@ -105,6 +111,7 @@ public class FullLog implements Serializable {
         return false;
     }
 
+    // removes the workout from the workout cycle
     public void removeWorkout(Workout workout) {
         for(WorkoutCycle cycle: myWorkoutCycles){
             cycle.removeWorkoutFromOneWeek(workout);
@@ -112,6 +119,7 @@ public class FullLog implements Serializable {
         }
     }
 
+    // set the active cycle for the calendar
     public void setActiveCycle(WorkoutCycle wc) {
         this.activeCycle = wc;
     }
@@ -124,6 +132,7 @@ public class FullLog implements Serializable {
         return myWeightLog;
     }
 
+    // creates the users default workouts
     private void createDefaultWorkouts() {
         ExerciseCatalog.loadExercises();
         Workout push = new Workout("push");

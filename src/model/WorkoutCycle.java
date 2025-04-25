@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Objects;
 
+// this class models a workoutCycle which is a collection of workouts that can be manipulated to match
+// the users needs
 public final class WorkoutCycle implements Serializable {
 	private String name;
 	private int numberWeeks;

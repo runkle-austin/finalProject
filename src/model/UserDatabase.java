@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
 
-// Code adapted from LA2 UserDatabase
+// this class is used to encode and save information about the useer to a file
 public class UserDatabase {
 	private ArrayList<User> accounts = new ArrayList<>();
 
@@ -54,7 +54,6 @@ public class UserDatabase {
 
 
 	//ADDING A USER
-	// @pre password is valid
 	public boolean createAccount(String username, String password) {
 		// checking if the user alr exists in the accounts
 		username = username.strip();
@@ -70,7 +69,6 @@ public class UserDatabase {
 		new SecureRandom().nextBytes(salt);
 
 		// encode both username and password with salt
-		// this is how I saw online for guides to doing databases of users
 		String encodedUsername = encode(username, salt);
 		String encodedPassword = encode(password, salt);
 
@@ -98,7 +96,7 @@ public class UserDatabase {
 	}
 
 
-
+	// this method encodes a word using the sha 256
 	public String encode(String input, byte[] salt) {
 		try {
 			MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
