@@ -23,6 +23,7 @@ public class LiftData implements Serializable {
 	}
 
 	// GETTERS
+	//TODO TEST THIS
 	public double getWeight(boolean showInLbs) {
 		if (showInLbs) {
 			return weightInLbs;
@@ -70,10 +71,7 @@ public class LiftData implements Serializable {
 	public void setWeightInLbs(double lbs) {
 		this.weightInLbs = lbs;
 	}
-	
-	public void setWeightInKg(double kg) {
-		this.weightInLbs = kg * 2.20462;
-	}
+
 	
 	public void setSets(int sets) {
 		this.sets = sets;
@@ -85,6 +83,8 @@ public class LiftData implements Serializable {
 		return Objects.hash(ex);
 	}
 
+
+	//TODO maybe test the rest to get above 90%
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

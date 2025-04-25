@@ -27,16 +27,19 @@ public class User implements UserObservable, Serializable {
 		this.myFullLog = new FullLog();
 	}
 
+	//TODO TEST
 	@Override
 	public void addObserver(UserObserver o) {
 		observers.add(o);
 	}
 
+	//TODO TEST
 	@Override
 	public void removeObserver(UserObserver o) {
 		observers.remove(o);
 	}
 
+	//TODO TEST
 	@Override
 	public void notifyObservers() {
 		for (UserObserver o : observers) {
@@ -74,6 +77,7 @@ public class User implements UserObservable, Serializable {
 		return Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(myFullLog, user.myFullLog);
 	}
 
+	//TODO TEST
 	@Override
 	public int hashCode() {
 		return Objects.hash(userName, password, myFullLog);
