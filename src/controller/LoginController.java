@@ -9,12 +9,10 @@ import view.LoginView;
 public class LoginController {
     private final GUIView app;
     private final Stage stage;
-    private final LoginView view;
 
-    public LoginController(GUIView app, Stage stage, LoginView view) {
+    public LoginController(GUIView app, Stage stage) {
         this.app = app;
         this.stage = stage;
-        this.view = view;
     }
 
     public void login(String username, String password) {
@@ -29,11 +27,22 @@ public class LoginController {
     }
 
     public void createAccount(String username, String password) {
-        boolean success = app.getUserDb().createAccount(username, password);
-        if (success) {
-            login(username, password);
-        } else {
-            showError("Account creation failed. Username already exists.");
+        String strongPassword = app.getUserDb().isStrongPassword(password);
+        if (strongPassword.equals("")) {
+            // if account created successfully
+            if (app.getUserDb().createAccount(username, password)) {
+                User currUser = app.getUserDb().login(username, password);
+                app.setCurrentUser(currUser);
+                app.setCurrentUserName(username);
+                // Successfully authenticated: show the home page.
+                app.showHomePage(stage);
+            }
+            else{
+                showError("Account Already Exists");
+            }
+        }
+        else {
+            showError(strongPassword);
         }
     }
 
