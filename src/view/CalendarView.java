@@ -143,7 +143,7 @@ public class CalendarView implements UserObserver {
 
     private void openWorkoutDetails(Workout workout) {
         Stage detailsStage = new Stage();
-        CalendarWorkoutView view = new CalendarWorkoutView(workout, showInLbs);
+        CalendarWorkoutView view = new CalendarWorkoutView(app.getCurrentUser(), workout, showInLbs);
         Scene scene = new Scene(view.getView(), 400, 300);
         detailsStage.setTitle("Workout Details");
         detailsStage.setScene(scene);
