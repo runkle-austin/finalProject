@@ -28,29 +28,32 @@ public class WorkoutCycleEditView {
 
         content.getChildren().addAll(title, length);
 
-        // For each day of week: show existing workout or allow add/remove
+        // For each day of the week: show existing workout or allow add/remove
         for (DayOfWeek day : DayOfWeek.values()) {
             HBox row = new HBox(10);
             row.setPadding(new Insets(5));
 
             Label dayLabel = new Label(
-                    day.toString().substring(0,1) +
+                    day.toString().substring(0, 1) +
                             day.toString().substring(1).toLowerCase()
             );
             dayLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+
             Workout existing = cycle.getOneWeek().get(day);
             if (existing != null) {
-                // Display and allow removal
+                // Display workout name and allow removal
                 Label workoutName = new Label(existing.getName());
                 workoutName.setStyle("-fx-font-size: 16px;");
                 Button removeBtn = new Button("Remove Workout");
                 removeBtn.setOnAction(e -> {
                     cycle.removeWorkout(day);
-                    // refresh the view
-                    app.showWorkoutCycleEditView(stage, cycle);
+                    app.showWorkoutCycleEditView(stage, cycle); // refresh
                 });
-                row.getChildren().addAll(dayLabel, workoutName, removeBtn);
+
+                row.getChildren().addAll(dayLabel, workoutName, spacer, removeBtn);
 
             } else {
                 // Allow adding a workout
@@ -77,7 +80,7 @@ public class WorkoutCycleEditView {
                     }
                 });
 
-                row.getChildren().addAll(dayLabel, combo, addBtn);
+                row.getChildren().addAll(dayLabel, combo, spacer, addBtn);
             }
 
             content.getChildren().add(row);
@@ -88,7 +91,7 @@ public class WorkoutCycleEditView {
         backBtn.setOnAction(e -> app.showWorkoutCyclesView(stage));
         content.getChildren().add(backBtn);
 
-        // Wrap in scroll pane
+        // Scrollable layout
         ScrollPane scrollPane = new ScrollPane(content);
         scrollPane.setFitToWidth(true);
 

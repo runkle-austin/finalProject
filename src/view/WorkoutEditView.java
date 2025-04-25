@@ -1,9 +1,9 @@
 package view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Exercise;
@@ -33,7 +33,11 @@ public class WorkoutEditView {
 
             HBox row = new HBox(15);
             row.setPadding(new Insets(5));
-            row.getChildren().addAll(liftLabel, removeButton);
+
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+
+            row.getChildren().addAll(liftLabel, spacer, removeButton);
 
             removeButton.setOnAction(e -> {
                 workout.removeLift(liftData.getName());
@@ -42,7 +46,6 @@ public class WorkoutEditView {
 
             content.getChildren().add(row);
         }
-
 
         // Input controls
         ComboBox<String> exerciseCombo = new ComboBox<>();
@@ -63,8 +66,13 @@ public class WorkoutEditView {
         // Input row (HBox)
         HBox inputRow = new HBox(10);
         inputRow.setPadding(new Insets(10));
-        inputRow.getChildren().addAll(exerciseCombo, setsField, repsField, weightField, addLiftBtn);
+        inputRow.setAlignment(Pos.CENTER_LEFT);
+        inputRow.setMaxWidth(Double.MAX_VALUE);
 
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        inputRow.getChildren().addAll(exerciseCombo, setsField, repsField, weightField, spacer, addLiftBtn);
         content.getChildren().addAll(inputRow, errorLabel);
 
         // Add-lift button logic
@@ -99,7 +107,11 @@ public class WorkoutEditView {
 
                 HBox liftRow = new HBox(15);
                 liftRow.setPadding(new Insets(5));
-                liftRow.getChildren().addAll(liftLabel, removeBtn);
+
+                Region rowSpacer = new Region();
+                HBox.setHgrow(rowSpacer, Priority.ALWAYS);
+
+                liftRow.getChildren().addAll(liftLabel, rowSpacer, removeBtn);
 
                 removeBtn.setOnAction(ev -> {
                     workout.removeLift(exerciseName);

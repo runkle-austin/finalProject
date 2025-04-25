@@ -5,10 +5,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.User;
 import model.WorkoutCycle;
+
 import java.util.ArrayList;
 
 public class WorkoutCyclesView {
@@ -26,8 +29,6 @@ public class WorkoutCyclesView {
         Button addCycleButton = new Button("Add Workout Cycle");
         addCycleButton.setOnAction(e -> app.showAddWorkoutCyclePage(stage));
 
-
-
         // VBox to hold all workout cycles
         VBox cycleList = new VBox(10);
         cycleList.setPadding(new Insets(10));
@@ -36,21 +37,22 @@ public class WorkoutCyclesView {
 
         for (WorkoutCycle cycle : cycles) {
             HBox row = new HBox(15);
+            row.setPadding(new Insets(5));
+
             Label name = new Label("Cycle: " + cycle.getName());
             Label weeks = new Label("Weeks: " + cycle.getNumberWeeks());
 
-            // Edit the Workout Cycle
+            // Buttons
             Button viewBtn = new Button("Edit");
             viewBtn.setOnAction(e -> app.showWorkoutCycleEditView(stage, cycle));
 
-            // Set a Workout Cycle as Active Cycle
             Button setCycleBtn = new Button("Set Workout Cycle");
             setCycleBtn.setOnAction(e -> {
                 user.getMyFullLog().setActiveCycle(cycle);
                 user.notifyObservers();
-                app.showCalendarView(stage);});
+                app.showCalendarView(stage);
+            });
 
-            // Button that Removes Workout Cycle
             Button removeCycleBtn = new Button("Remove Workout Cycle");
             removeCycleBtn.setOnAction(e -> {
                 WorkoutCycle active = user.getMyFullLog().getActiveCycle();
@@ -67,7 +69,11 @@ public class WorkoutCyclesView {
                 }
             });
 
-            row.getChildren().addAll(name, weeks, viewBtn,  setCycleBtn, removeCycleBtn);
+            // Spacer to push buttons to the right
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+
+            row.getChildren().addAll(name, weeks, spacer, viewBtn, setCycleBtn, removeCycleBtn);
             cycleList.getChildren().add(row);
         }
 
