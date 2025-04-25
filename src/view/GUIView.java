@@ -22,7 +22,7 @@ public class GUIView extends Application {
 
     public void showLogin(Stage stage) {
         LoginView loginView = new LoginView(this, stage);
-        Scene scene = new Scene(loginView, 350, 250);
+        Scene scene = new Scene(loginView.getView(), 350, 250); // ✅ get the actual layout
         stage.setScene(scene);
         stage.setTitle("Login");
         stage.show();

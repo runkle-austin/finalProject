@@ -29,9 +29,11 @@ public final class WorkoutCycle implements Serializable {
 
 
 
+	//TODO TEST these or delete
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public int getNumberWeeks() {
 		return this.numberWeeks;
@@ -70,15 +72,18 @@ public final class WorkoutCycle implements Serializable {
 		return true;
 	}
 
+	//TODO TEST
 	public void removeWorkoutFromOneWeek(Workout w) {
         oneWeek.keySet().removeIf(day -> oneWeek.get(day).equals(w));
 	}
 
+	//TODO TEST
 	// Helper Method to Ad Workout By Day Object not String
 	public void setWorkoutByDay(DayOfWeek day, Workout w) {
 		oneWeek.put(day, w);
 	}
 
+	//TODO TEST
 	// Helper Method for GUI to Remove Workout By Day
 	public void removeWorkout(DayOfWeek day) {
 		oneWeek.remove(day);
@@ -145,9 +150,6 @@ public final class WorkoutCycle implements Serializable {
 		return str;
 	}
 
-	public void setFullCycle(ArrayList<HashMap<DayOfWeek, Workout>> fullCycle) {
-		this.fullCycle = fullCycle;
-	}
 
 	@Override
 	public String toString() {
@@ -165,6 +167,7 @@ public final class WorkoutCycle implements Serializable {
 		return str;
 	}
 
+	//TODO TEST
 	public ArrayList<HashMap<DayOfWeek, Workout>> getFullCycleData() {
 		return this.fullCycle;
 	}

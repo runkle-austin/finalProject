@@ -1,35 +1,38 @@
 package view;
 
 import controller.LoginController;
-import javafx.scene.control.*;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.User;
 
-import java.awt.*;
+public class LoginView {
+    private final VBox root = new VBox(10);
+    private final LoginController controller;
 
-public class LoginView extends VBox {
     public LoginView(GUIView app, Stage stage) {
-        setPadding(new Insets(20));
-        setSpacing(10);
+        root.setPadding(new Insets(20));
 
         Label title = new Label("Please Log In");
-        TextField username = new TextField();
-        username.setPromptText("Username");
-        PasswordField password = new PasswordField();
-        password.setPromptText("Password");
+
+        TextField usernameField = new TextField();
+        usernameField.setPromptText("Username");
+
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Password");
 
         Button loginBtn = new Button("Login");
-        LoginController controller = new LoginController(app, stage);
-        loginBtn.setOnAction(e -> controller.login(username.getText(), password.getText()));
-
         Button createBtn = new Button("Create Account");
-        createBtn.setOnAction(e -> controller.createAccount(username.getText(), password.getText()));
 
-        getChildren().addAll(title, username, password, loginBtn, createBtn);
+        this.controller = new LoginController(app, stage, this);
+        loginBtn.setOnAction(e -> controller.login(usernameField.getText(), passwordField.getText()));
+        createBtn.setOnAction(e -> controller.createAccount(usernameField.getText(), passwordField.getText()));
+
+        root.getChildren().addAll(title, usernameField, passwordField, loginBtn, createBtn);
+    }
+
+    public Parent getView() {
+        return root;
     }
 }

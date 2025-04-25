@@ -35,6 +35,7 @@ public final class ExerciseCatalog {
 		}
 	}
 
+	//TODO test this
 	public static List<Exercise> getAllExercises() {
 		return Collections.unmodifiableList(exercises);
 	}

@@ -42,9 +42,6 @@ public class FullLog implements Serializable {
         return workouts;
     }
 
-    public void setMyWorkouts(ArrayList<Workout> workouts){
-        myWorkouts = workouts;
-    }
 
     // Change: 4/23 Carlos: boolean to void return type (fix for GUI)
     public boolean addWorkout(Workout workout){
@@ -94,6 +91,7 @@ public class FullLog implements Serializable {
         return false;
     }
 
+    //TODO TEST
     public void removeWorkout(Workout workout) {
         for(WorkoutCycle cycle: myWorkoutCycles){
             cycle.removeWorkoutFromOneWeek(workout);
@@ -105,10 +103,12 @@ public class FullLog implements Serializable {
         this.activeCycle = wc;
     }
 
+    //TODO TEST
     public WorkoutCycle getActiveCycle() {
         return activeCycle;
     }
 
+    //TODO TEST
     public Map<LocalDate, Double> getMyWeightLog() {
         return myWeightLog;
     }
