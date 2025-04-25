@@ -23,9 +23,9 @@ public class WorkoutCyclesView {
         backBtn.setOnAction(e -> app.showHomePage(stage));
 
         // Button to Add Workout Cycles
-        /*Button addCycleButton = new Button("Add Workout Cycle");
+        Button addCycleButton = new Button("Add Workout Cycle");
         addCycleButton.setOnAction(e -> app.showAddWorkoutCyclePage(stage));
-         */
+
 
 
         // VBox to hold all workout cycles
@@ -73,7 +73,7 @@ public class WorkoutCyclesView {
 
         view = new VBox(20);
         view.setPadding(new Insets(20));
-        view.getChildren().addAll(backBtn, cycleList);
+        view.getChildren().addAll(backBtn, addCycleButton, cycleList);
     }
 
     public VBox getView() {

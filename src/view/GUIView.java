@@ -113,6 +113,14 @@ public class GUIView extends Application {
         stage.show();
     }
 
+    public void showAddWorkoutCyclePage(Stage stage) {
+        WorkoutCycleAddView workoutCycleAddView = new WorkoutCycleAddView(this, stage);
+        Scene scene = new Scene(workoutCycleAddView.getView(), 800, 600);
+        stage.setTitle("Add Workout Cycle");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public UserDatabase getUserDb() {
         return userDb;
     }
@@ -146,4 +154,6 @@ public class GUIView extends Application {
     public String getUsername() {
         return username;
     }
+
+
 }
