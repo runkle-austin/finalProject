@@ -47,7 +47,7 @@ public class AddWorkoutController {
             }
 
             Workout newWorkout = new Workout(workoutName);
-            if (user.getMyFullLog().addWorkout(newWorkout)) {
+            if (!user.getMyFullLog().checkDupWorkoutName(workoutName) && user.getMyFullLog().addWorkout(newWorkout)) {
                 user.notifyObservers(); // Notify view updates
                 app.showEditLiftsView(stage, newWorkout);
             } else {

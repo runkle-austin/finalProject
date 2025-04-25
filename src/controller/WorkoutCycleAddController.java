@@ -105,11 +105,20 @@ public class WorkoutCycleAddController {
                 return;
             }
 
+            // check if the name exists
+            if (user.getMyFullLog().containCycleName(title)) {
+                errorLabel.setText("Cycle name taken.");
+                return;
+            }
+
             int length;
             try {
                 length = Integer.parseInt(lengthText);
                 if (length <= 0) {
                     errorLabel.setText("Length must be greater than 0.");
+                    return;
+                } else if (length > 10) {
+                    errorLabel.setText("Length must be less than 10.");
                     return;
                 }
             } catch (NumberFormatException ex) {

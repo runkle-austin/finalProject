@@ -42,6 +42,24 @@ public class FullLog implements Serializable {
         return workouts;
     }
 
+    // check if the cycle name is already being used
+    public boolean containCycleName(String name){
+        for (WorkoutCycle cycle : myWorkoutCycles) {
+            if (cycle.getName().equals(name)) {
+                return true;
+            }
+        } return false;
+    }
+
+    // returns true if there are duplicates, false otherwise
+    public boolean checkDupWorkoutName(String name){
+        for (Workout curr : myWorkouts) {
+             if (curr != null && curr.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // Change: 4/23 Carlos: boolean to void return type (fix for GUI)
     public boolean addWorkout(Workout workout){

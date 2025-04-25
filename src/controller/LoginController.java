@@ -4,7 +4,6 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.User;
 import view.GUIView;
-import view.LoginView;
 
 public class LoginController {
     private final GUIView app;
