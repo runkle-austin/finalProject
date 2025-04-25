@@ -1,6 +1,7 @@
 /* MainApp.java */
 package view;
 
+import controller.WorkoutCyclesController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -53,10 +54,11 @@ public class GUIView extends Application {
     }
 
     public void showWorkoutCyclesView(Stage stage) {
-        WorkoutCyclesView workoutCyclesView = new WorkoutCyclesView(this, stage);
-        Scene scene = new Scene(workoutCyclesView.getView(), 800, 600);
-        stage.setTitle("My Workout Cycles");
+        WorkoutCyclesView workoutCyclesView = new WorkoutCyclesView(currentUser); // passes user
+        WorkoutCyclesController controller = new WorkoutCyclesController(this, stage, workoutCyclesView); // passes this GUIView as 'app'
+        Scene scene = new Scene(workoutCyclesView, 800, 600);
         stage.setScene(scene);
+        stage.setTitle("My Workout Cycles");
         stage.show();
     }
 

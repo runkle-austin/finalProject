@@ -1,88 +1,65 @@
 package view;
 
+import controller.WorkoutCyclesController;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import model.User;
 import model.WorkoutCycle;
+import observer.UserObserver;
 
 import java.util.ArrayList;
 
-public class WorkoutCyclesView {
-    private final VBox view;
-    private final User user;
+public class WorkoutCyclesView extends VBox implements UserObserver {
+    private final VBox cycleList = new VBox(10);
+    private WorkoutCyclesController controller;
 
-    public WorkoutCyclesView(GUIView app, Stage stage) {
-        this.user = app.getCurrentUser();
+    public WorkoutCyclesView(User user) {
+        setSpacing(20);
+        setPadding(new Insets(20));
+        user.addObserver(this);
 
-        // Back Button
         Button backBtn = new Button("Back to Home");
-        backBtn.setOnAction(e -> app.showHomePage(stage));
+        backBtn.setOnAction(e -> controller.handleBack());
 
-        // Button to Add Workout Cycles
-        Button addCycleButton = new Button("Add Workout Cycle");
-        addCycleButton.setOnAction(e -> app.showAddWorkoutCyclePage(stage));
+        Button addCycleBtn = new Button("Add Workout Cycle");
+        addCycleBtn.setOnAction(e -> controller.handleAddCycle());
 
-        // VBox to hold all workout cycles
-        VBox cycleList = new VBox(10);
-        cycleList.setPadding(new Insets(10));
+        getChildren().addAll(backBtn, addCycleBtn, cycleList);
+    }
 
-        ArrayList<WorkoutCycle> cycles = user.getMyFullLog().getMyWorkoutCycles();
+    public void setController(WorkoutCyclesController controller) {
+        this.controller = controller;
+    }
+
+    public void showCycles(ArrayList<WorkoutCycle> cycles) {
+        cycleList.getChildren().clear();
 
         for (WorkoutCycle cycle : cycles) {
-            HBox row = new HBox(15);
+            HBox row = new HBox(10);
             row.setPadding(new Insets(5));
 
             Label name = new Label("Cycle: " + cycle.getName());
             Label weeks = new Label("Weeks: " + cycle.getNumberWeeks());
 
-            // Buttons
-            Button viewBtn = new Button("Edit");
-            viewBtn.setOnAction(e -> app.showWorkoutCycleEditView(stage, cycle));
-
-            Button setCycleBtn = new Button("Set Workout Cycle");
-            setCycleBtn.setOnAction(e -> {
-                user.getMyFullLog().setActiveCycle(cycle);
-                user.notifyObservers();
-                app.showCalendarView(stage);
-            });
-
-            Button removeCycleBtn = new Button("Remove Workout Cycle");
-            removeCycleBtn.setOnAction(e -> {
-                WorkoutCycle active = user.getMyFullLog().getActiveCycle();
-
-                if (cycle.equals(active)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Cannot Remove Active Cycle");
-                    alert.setHeaderText(null);
-                    alert.setContentText("You cannot remove the currently active workout cycle. Please Set a New Cycle.");
-                    alert.showAndWait();
-                } else {
-                    user.getMyFullLog().removeWorkoutCycle(cycle);
-                    cycleList.getChildren().remove(row);
-                }
-            });
-
-            // Spacer to push buttons to the right
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
 
-            row.getChildren().addAll(name, weeks, spacer, viewBtn, setCycleBtn, removeCycleBtn);
+            Button viewBtn = new Button("Edit");
+            Button setBtn = new Button("Set");
+            Button removeBtn = new Button("Remove");
+
+            viewBtn.setOnAction(e -> controller.handleEditCycle(cycle));
+            setBtn.setOnAction(e -> controller.handleSetCycle(cycle));
+            removeBtn.setOnAction(e -> controller.handleRemoveCycle(cycle));
+
+            row.getChildren().addAll(name, weeks, spacer, viewBtn, setBtn, removeBtn);
             cycleList.getChildren().add(row);
         }
-
-        view = new VBox(20);
-        view.setPadding(new Insets(20));
-        view.getChildren().addAll(backBtn, addCycleButton, cycleList);
     }
 
-    public VBox getView() {
-        return view;
+    @Override
+    public void modelChanged() {
+        controller.refreshCycles();
     }
 }
